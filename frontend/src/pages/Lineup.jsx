@@ -1,48 +1,94 @@
 import { useEffect, useState } from "react";
 
 export default function Lineup() {
-  // État pour stocker les artistes récupérés depuis l'API
   const [artists, setArtists] = useState([]);
-  const [loading, setLoading] = useState(true); // Pour afficher un chargement
+  const [message, setMessage] = useState("");
+  const [favoritesAdded, setFavoritesAdded] = useState(new Set());
 
-  // Fonction exécutée au montage du composant (équivalent componentDidMount)
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
-    // Appel à l'API pour récupérer les artistes
     const fetchArtists = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/artists");
-        const data = await response.json();
-        setArtists(data);      // Met à jour la liste des artistes
-        setLoading(false);     // On a fini de charger
-      } catch (error) {
-        console.error("Erreur lors du chargement des artistes :", error);
-        setLoading(false); // Même en cas d’erreur, on stoppe le "chargement"
+        const res = await fetch("http://localhost:5000/api/artists");
+        const data = await res.json();
+        setArtists(data);
+      } catch (err) {
+        console.error("Erreur lors du chargement des artistes :", err);
       }
     };
 
-    fetchArtists(); // Lance l'appel API
-  }, []); // Le tableau vide signifie que ça ne s’exécute qu’une seule fois
+    fetchArtists();
+  }, []);
+
+  const handleFavorite = async (artistId) => {
+    if (!user || !token) {
+      setMessage("Connectez-vous pour ajouter un favori.");
+      return;
+    }
+
+    // désactive le bouton
+    if (favoritesAdded.has(artistId)) return;
+
+    try {
+      const res = await fetch(
+        `http://localhost:5000/api/users/${user.id}/favorites`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ artist_id: artistId }),
+        }
+      );
+
+      const data = await res.json();
+      if (!res.ok) {
+        setMessage(data.error || "Erreur");
+      } else {
+        setMessage(`✅ "${data.name || 'Artiste'}" ajouté aux favoris.`);
+        setFavoritesAdded((prev) => new Set(prev).add(artistId));
+      }
+    } catch (error) {
+      console.error("Erreur lors de l'ajout aux favoris :", error);
+      setMessage("Erreur serveur");
+    }
+  };
 
   return (
-    <div>
-      <h2>Programmation des artistes</h2>
+    <div className="p-4 max-w-2xl mx-auto">
+      <h2 className="text-2xl font-bold mb-4">Line-up</h2>
 
-      {/* Affichage d’un message pendant le chargement */}
-      {loading && <p>Chargement en cours...</p>}
+      {message && <p className="mb-4 text-sm text-green-600">{message}</p>}
 
-      {/* Affichage des artistes quand les données sont prêtes */}
-      {!loading && artists.length === 0 && <p>Aucun artiste trouvé.</p>}
-
-      {!loading && artists.length > 0 && (
-        <ul>
-          {artists.map((artist) => (
-            <li key={artist.id}>
-              <strong>{artist.name}</strong>
-              {/* Tu peux ajouter ici genre un bouton "favori" plus tard */}
-            </li>
-          ))}
-        </ul>
-      )}
+      <ul className="space-y-4">
+        {artists.map((artist) => (
+          <li
+            key={artist.id}
+            className="p-4 border rounded shadow flex justify-between items-center"
+          >
+            <div>
+              <h3 className="text-lg font-semibold">{artist.name}</h3>
+              {artist.genre && <p className="text-sm text-gray-600">{artist.genre}</p>}
+            </div>
+            {user && (
+              <button
+                onClick={() => handleFavorite(artist.id)}
+                disabled={favoritesAdded.has(artist.id)}
+                className={`px-3 py-1 rounded transition ${
+                  favoritesAdded.has(artist.id)
+                    ? "bg-gray-300 cursor-not-allowed"
+                    : "bg-yellow-400 text-black hover:bg-yellow-300"
+                }`}
+              >
+                {favoritesAdded.has(artist.id) ? "Ajouté" : "★ Favori"}
+              </button>
+            )}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

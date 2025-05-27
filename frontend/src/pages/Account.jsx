@@ -1,23 +1,26 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Account() {
   const [favorites, setFavorites] = useState([]);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  // 🔐 Récupération des infos utilisateur
   const user = JSON.parse(localStorage.getItem("user"));
   const token = localStorage.getItem("token");
 
-  // ✅ Appel à l’API pour récupérer les favoris
+  // Si non connecté → redirige vers /login
+  useEffect(() => {
+    if (!user || !token) {
+      navigate("/login");
+    }
+  }, [user, token, navigate]);
+
+  // Récupère les favoris
   useEffect(() => {
     const fetchFavorites = async () => {
-      if (!user || !token) {
-        setError("Utilisateur non connecté");
-        return;
-      }
-
       try {
-        const response = await fetch(
+        const res = await fetch(
           `http://localhost:5000/api/users/${user.id}/favorites`,
           {
             headers: {
@@ -26,36 +29,45 @@ export default function Account() {
           }
         );
 
-        const data = await response.json();
+        const data = await res.json();
 
-        if (!response.ok) {
-          setError(data.error || "Erreur lors du chargement des favoris");
+        if (!res.ok) {
+          setError(data.error || "Erreur lors du chargement");
         } else {
-          setFavorites(data); // Stocke les favoris
+          setFavorites(data);
         }
       } catch (err) {
-        setError("Erreur réseau ou serveur");
+        setError("Erreur serveur ou réseau");
       }
     };
 
     fetchFavorites();
-  }, [user, token]); // Exécuté si user ou token change
+  }, [user.id, token]);
+
+  // Déconnexion
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
 
   return (
-    <div>
-      <h2>Mes artistes favoris</h2>
+    <div className="p-4 max-w-xl mx-auto">
+      <h2 className="text-xl font-bold mb-4">Mon compte</h2>
 
-      {/* Affiche une erreur si besoin */}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      <button
+        onClick={handleLogout}
+        className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 mb-4"
+      >
+        Déconnexion
+      </button>
 
-      {/* Affiche un message si aucun favori */}
+      {error && <p className="text-red-500">{error}</p>}
       {!error && favorites.length === 0 && <p>Aucun favori pour l’instant.</p>}
 
-      {/* Affiche la liste des artistes favoris */}
-      <ul>
+      <ul className="space-y-2">
         {favorites.map((artist) => (
-          <li key={artist.id}>
-            <strong>{artist.name}</strong>
+          <li key={artist.id} className="p-2 bg-gray-100 rounded">
+            {artist.name}
           </li>
         ))}
       </ul>
