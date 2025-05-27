@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ArtistCard from "../components/ArtistCard";
 
 export default function Account() {
   const [favorites, setFavorites] = useState([]);
@@ -64,13 +65,13 @@ export default function Account() {
       {error && <p className="text-red-500">{error}</p>}
       {!error && favorites.length === 0 && <p>Aucun favori pour l’instant.</p>}
 
-      <ul className="space-y-2">
-        {favorites.map((artist) => (
-          <li key={artist.id} className="p-2 bg-gray-100 rounded">
-            {artist.name}
-          </li>
-        ))}
-      </ul>
+      <ul className="space-y-4">
+  {favorites.map((artist) => (
+    <li key={artist.id}>
+      <ArtistCard artist={artist} linkToDetail={false} />
+    </li>
+  ))}
+</ul>
     </div>
   );
 }

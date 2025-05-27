@@ -37,6 +37,9 @@ export default function Header() {
             Connexion
           </Link>
         )}
+        <Link to="/tickets" className="hover:underline">
+  Billetterie
+</Link>
       </nav>
     </header>
   );

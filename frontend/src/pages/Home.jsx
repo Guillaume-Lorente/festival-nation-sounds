@@ -29,6 +29,10 @@ export default function Home() {
         >
           🎟️ Billetterie
         </a>
+        <div className="bg-yellow-400 text-black p-6 rounded-lg shadow-lg text-center mt-10">
+  <h1 className="text-2xl font-bold">✅ Tailwind fonctionne</h1>
+  <p>Si tu vois ce bloc jaune, tout est bon</p>
+</div>
       </div>
     </div>
   );

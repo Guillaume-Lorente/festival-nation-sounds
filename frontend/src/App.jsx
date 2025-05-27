@@ -5,6 +5,8 @@ import Lineup from "./pages/Lineup";
 import Account from "./pages/Account";
 import Header from "./components/Header";
 import Home from "./pages/Home";
+import ArtistDetail from "./pages/ArtistDetail";
+import Tickets from "./pages/Tickets";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/account" element={<Account />} />
         <Route path="/lineup" element={<Lineup />} />
+        <Route path="/artist/:id" element={<ArtistDetail />} />
+        <Route path="/tickets" element={<Tickets />} />
       </Routes>
     </Router>
   );
