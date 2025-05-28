@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -7,7 +7,12 @@ export default function Login() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // Envoie du formulaire
+  // 🔐 Redirige si déjà connecté
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) navigate("/account");
+  }, [navigate]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -26,11 +31,8 @@ export default function Login() {
         return;
       }
 
-      // Stockage du token + utilisateur
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
-
-      // Redirection vers /account
       navigate("/account");
     } catch (err) {
       setError("Erreur réseau ou serveur");
@@ -38,14 +40,14 @@ export default function Login() {
   };
 
   return (
-    <div className="p-4 max-w-md mx-auto">
-      <h2 className="text-xl font-bold mb-4">Connexion</h2>
+    <div className="p-6 max-w-md mx-auto">
+      <h2 className="text-2xl font-bold mb-6 text-center">Connexion</h2>
 
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <p className="text-red-600 mb-4">{error}</p>}
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block font-medium">Email</label>
+          <label className="block font-medium mb-1">Email</label>
           <input
             type="email"
             className="w-full border rounded p-2"
@@ -56,7 +58,7 @@ export default function Login() {
         </div>
 
         <div>
-          <label className="block font-medium">Mot de passe</label>
+          <label className="block font-medium mb-1">Mot de passe</label>
           <input
             type="password"
             className="w-full border rounded p-2"
@@ -68,7 +70,7 @@ export default function Login() {
 
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
         >
           Se connecter
         </button>

@@ -4,10 +4,13 @@ import Register from "./pages/Register";
 import Lineup from "./pages/Lineup";
 import Account from "./pages/Account";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import ArtistDetail from "./pages/ArtistDetail";
 import Tickets from "./pages/Tickets";
 import PrivateRoute from "./components/PrivateRoute";
+import Cart from "./pages/Cart";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -21,7 +24,10 @@ function App() {
         <Route path="/lineup" element={<Lineup />} />
         <Route path="/artist/:id" element={<ArtistDetail />} />
         <Route path="/tickets" element={<Tickets />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

@@ -1,88 +1,90 @@
-// Import des hooks React nécessaires
-import { useState } from "react"; // Pour gérer les champs du formulaire
-import { useNavigate } from "react-router-dom"; // Pour rediriger l'utilisateur après inscription
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
-  // Déclaration des états pour chaque champ du formulaire
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // Pour afficher une erreur éventuelle
+  const [error, setError] = useState("");
 
-  const navigate = useNavigate(); // Permet de rediriger l'utilisateur
+  const navigate = useNavigate();
 
-  // Fonction appelée lors de la soumission du formulaire
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) navigate("/account");
+  }, [navigate]);
+
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Empêche le rechargement de la page
-    setError(""); // Réinitialise l'erreur précédente
+    e.preventDefault();
+    setError("");
 
     try {
-      // Appel à l'API pour s'inscrire
-      const response = await fetch("http://localhost:5000/api/register", {
+      const res = await fetch("http://localhost:5000/api/register", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json", // On envoie du JSON
-        },
-        body: JSON.stringify({ email, username, password }), // Corps de la requête
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, username, password }),
       });
 
-      const data = await response.json(); // Réponse transformée en JSON
+      const data = await res.json();
 
-      // Si le serveur a renvoyé une erreur
-      if (!response.ok) {
+      if (!res.ok) {
         setError(data.error || "Erreur lors de l'inscription");
         return;
       }
 
-      // Si tout va bien, on redirige vers la page de connexion
       navigate("/login");
     } catch (err) {
-      // Si le serveur ne répond pas ou erreur réseau
       setError("Erreur réseau ou serveur");
     }
   };
 
-  // Rendu JSX : formulaire d'inscription
   return (
-    <div>
-      <h2>Inscription</h2>
-      <form onSubmit={handleSubmit}>
-        {/* Champ email */}
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <br />
+    <div className="p-6 max-w-md mx-auto">
+      <h2 className="text-2xl font-bold mb-6 text-center">Inscription</h2>
 
-        {/* Champ nom d'utilisateur */}
-        <input
-          type="text"
-          placeholder="Nom d'utilisateur"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-        <br />
+      {error && <p className="text-red-600 mb-4">{error}</p>}
 
-        {/* Champ mot de passe */}
-        <input
-          type="password"
-          placeholder="Mot de passe"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <br />
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label className="block font-medium mb-1">Email</label>
+          <input
+            type="email"
+            className="w-full border rounded p-2"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
 
-        {/* Bouton de soumission */}
-        <button type="submit">S'inscrire</button>
+        <div>
+          <label className="block font-medium mb-1">Nom d'utilisateur</label>
+          <input
+            type="text"
+            className="w-full border rounded p-2"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block font-medium mb-1">Mot de passe</label>
+          <input
+            type="password"
+            className="w-full border rounded p-2"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+        >
+          S'inscrire
+        </button>
       </form>
-
-      {/* Affichage de l'erreur si elle existe */}
-      {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
 }

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import ArtistCard from "../components/ArtistCard";
-import { useFavorites } from "../contexts/FavoritesContext"; // ✅ Import du contexte
+import { useFavorites } from "../context/FavoritesContext";
 
 export default function Lineup() {
   const [artists, setArtists] = useState([]);
-  const { favorites, addFavorite } = useFavorites(); // ✅ Récupère les favoris + fonction d'ajout
+  const { favorites, addFavorite } = useFavorites();
 
   useEffect(() => {
     const fetchArtists = async () => {
@@ -20,22 +20,26 @@ export default function Lineup() {
     fetchArtists();
   }, []);
 
-  // ✅ Fonction appelée quand on clique sur "Ajouter aux favoris"
   const handleAddFavorite = (artistId) => {
     addFavorite(artistId);
   };
 
   return (
-    <div className="p-4 max-w-2xl mx-auto">
-      <h2 className="text-2xl font-bold mb-4">Line-up</h2>
+    <div className="p-8 max-w-4xl mx-auto">
+      <div className="text-center mb-10">
+        <h2 className="text-3xl font-bold text-blue-700 mb-2">🎤 La line-up</h2>
+        <p className="text-gray-600">
+          Découvre les artistes qui vont enflammer la scène !
+        </p>
+      </div>
 
-      <ul className="space-y-4">
+      <ul className="grid sm:grid-cols-1 md:grid-cols-2 gap-6">
         {artists.map((artist) => (
           <li key={artist.id}>
             <ArtistCard
               artist={artist}
-              isFavorite={favorites.some((fav) => fav.id === artist.id)} // ✅ On vérifie si déjà ajouté
-              onAddFavorite={handleAddFavorite} // ✅ Action pour ajouter
+              isFavorite={favorites.some((fav) => fav.id === artist.id)}
+              onAddFavorite={handleAddFavorite}
             />
           </li>
         ))}

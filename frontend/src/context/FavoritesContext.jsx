@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 // Création du contexte
-const FavoritesContext = createContext();
+export const FavoritesContext = createContext();
 
 // Hook personnalisé pour accéder plus facilement au contexte
 export function useFavorites() {

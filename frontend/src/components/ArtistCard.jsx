@@ -1,27 +1,19 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { useFavorites } from "../context/FavoritesContext";
-import { useState } from "react";
+import { FavoritesContext } from "../context/FavoritesContext"; // 🔄 Import du contexte des favoris
 
 export default function ArtistCard({ artist, linkToDetail = true }) {
-  const { favorites, addFavorite } = useFavorites();
-  const [message, setMessage] = useState("");
+  const user = JSON.parse(localStorage.getItem("user"));
 
-  const isFavorite = favorites.some((fav) => fav.id === artist.id);
+  // 🔄 On récupère les favoris et la fonction d’ajout depuis le contexte
+  const { favorites, addFavorite } = useContext(FavoritesContext);
 
-  const handleAdd = async () => {
-    if (isFavorite) return;
-
-    const result = await addFavorite(artist.id);
-    if (result.success) {
-      setMessage(`✅ "${artist.name}" ajouté aux favoris`);
-    } else {
-      setMessage(result.error);
-    }
-  };
+   const isAlreadyFavorite = favorites.some((fav) => fav.id === artist.id);
 
   return (
     <div className="p-4 border rounded shadow flex justify-between items-center">
       <div>
+        {/* 🔗 Lien vers la page détail si autorisé */}
         {linkToDetail ? (
           <Link
             to={`/artists/${artist.id}`}
@@ -32,24 +24,30 @@ export default function ArtistCard({ artist, linkToDetail = true }) {
         ) : (
           <p className="text-lg font-semibold">{artist.name}</p>
         )}
-        {artist.genre && <p className="text-sm text-gray-600">{artist.genre}</p>}
+        {/* 🎵 Genre affiché si présent */}
+        {artist.genre && (
+          <p className="text-sm text-gray-600">{artist.genre}</p>
+        )}
       </div>
 
-      <div className="ml-4 text-right">
-        <button
-          onClick={handleAdd}
-          disabled={isFavorite}
-          className={`px-4 py-2 rounded ${
-            isFavorite
-              ? "bg-gray-300 cursor-not-allowed"
+      {/* ⭐ Bouton Favori, visible seulement si connecté */}
+       <button
+  onClick={() => {
+    if (!user) {
+      alert("Veuillez vous connecter pour ajouter un favori.");
+      return;
+    }
+    addFavorite(artist.id);
+  }}
+          disabled={isAlreadyFavorite}
+          className={`px-4 py-2 rounded mt-2 transition-all duration-200 ${
+            isAlreadyFavorite
+              ? "bg-gray-300 text-gray-600 cursor-not-allowed"
               : "bg-yellow-400 text-black hover:bg-yellow-300"
           }`}
         >
-          {isFavorite ? "Ajouté" : "★ Ajouter aux favoris"}
+          {isAlreadyFavorite ? "✔️ Déjà en favoris" : "★ Ajouter aux favoris"}
         </button>
-
-        {message && <p className="text-sm mt-1 text-green-600">{message}</p>}
-      </div>
     </div>
   );
 }

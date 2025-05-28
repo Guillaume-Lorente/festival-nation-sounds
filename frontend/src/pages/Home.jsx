@@ -2,38 +2,29 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
-    <div className="p-6 text-center max-w-2xl mx-auto">
-      <h1 className="text-4xl font-bold mb-4">🎶 Nation Sounds Festival 2025</h1>
-      <p className="text-lg mb-6 text-gray-700">
-        Vibrez au rythme de la musique, du soleil et de vos artistes préférés.
-      </p>
+    <main className="text-center p-8">
+      <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-10 rounded-lg shadow-lg">
+        <h1 className="text-4xl font-bold mb-4">🎶 Nation Sounds Festival</h1>
+        <p className="text-lg mb-6">
+          L'événement musical de l'année ! Prépare-toi à vivre 3 jours inoubliables au rythme de la musique.
+        </p>
 
-      <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-        <Link
-          to="/lineup"
-          className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition"
-        >
-          🎸 Découvrir la line-up
-        </Link>
+        <div className="flex justify-center gap-4">
+          <Link
+            to="/lineup"
+            className="bg-white text-blue-600 font-semibold px-6 py-2 rounded hover:bg-gray-100 transition"
+          >
+            Découvrir la line-up
+          </Link>
 
-        <Link
-          to="/account"
-          className="bg-yellow-400 text-black px-6 py-3 rounded hover:bg-yellow-300 transition"
-        >
-          ⭐ Mes favoris
-        </Link>
-
-        <a
-          href="#"
-          className="bg-red-600 text-white px-6 py-3 rounded hover:bg-red-700 transition"
-        >
-          🎟️ Billetterie
-        </a>
-        <div className="bg-yellow-400 text-black p-6 rounded-lg shadow-lg text-center mt-10">
-  <h1 className="text-2xl font-bold">✅ Tailwind fonctionne</h1>
-  <p>Si tu vois ce bloc jaune, tout est bon</p>
-</div>
-      </div>
-    </div>
+          <Link
+            to="/tickets"
+            className="bg-yellow-400 text-black font-semibold px-6 py-2 rounded hover:bg-yellow-300 transition"
+          >
+            Acheter un billet
+          </Link>
+        </div>
+      </section>
+    </main>
   );
 }

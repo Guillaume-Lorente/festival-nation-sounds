@@ -1,19 +1,16 @@
-import { useParams, useNavigate } from "react-router-dom"; // Pour récupérer l'ID dans l'URL et rediriger
-import { useEffect, useState } from "react"; // Hooks React
-import ArtistCard from "../components/ArtistCard";
-import FavoriteButton from "../components/FavoriteButton";
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useFavorites } from "../context/FavoritesContext";
 
 export default function ArtistDetail() {
-  const { id } = useParams(); // Récupère l'ID de l'artiste dans l'URL
-  const [artist, setArtist] = useState(null); // Stocke les données de l’artiste
-  const [error, setError] = useState(""); // Gère les erreurs serveur
-  const [message, setMessage] = useState(""); // Message d’ajout aux favoris
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [artist, setArtist] = useState(null);
+  const [error, setError] = useState("");
 
-  const user = JSON.parse(localStorage.getItem("user")); // Récupère l’utilisateur connecté
-  const token = localStorage.getItem("token"); // Récupère le token
-  const navigate = useNavigate(); // Pour rediriger si non connecté
+  const user = JSON.parse(localStorage.getItem("user"));
+  const { favorites, addFavorite } = useFavorites();
 
-  // Effet déclenché à l’ouverture de la page
   useEffect(() => {
     const fetchArtist = async () => {
       try {
@@ -21,62 +18,50 @@ export default function ArtistDetail() {
         const data = await res.json();
 
         if (!res.ok) {
-          setError(data.error || "Artiste introuvable"); // Si l’artiste n’existe pas
+          setError(data.error || "Artiste introuvable");
         } else {
-          setArtist(data); // Stocke l’artiste récupéré
+          setArtist(data);
         }
       } catch (err) {
-        setError("Erreur serveur"); // Erreur de connexion
+        setError("Erreur serveur");
       }
     };
 
     fetchArtist();
-  }, [id]); // Re-exécute si l’id change
+  }, [id]);
 
-  // Fonction appelée au clic sur "Ajouter aux favoris"
-  const handleFavorite = async () => {
-    if (!user || !token) {
-      navigate("/login"); // Redirige si non connecté
+  const isFavorite = favorites.some((fav) => fav.id === artist?.id);
+
+  const handleAddFavorite = () => {
+    if (!user) {
+      navigate("/login");
       return;
     }
-
-    try {
-      const res = await fetch(
-        `http://localhost:5000/api/users/${user.id}/favorites`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // En-tête obligatoire
-          },
-          body: JSON.stringify({ artist_id: artist.id }), // Envoie l’ID de l’artiste
-        }
-      );
-
-      const data = await res.json();
-      if (!res.ok) {
-        setMessage(data.error || "Erreur");
-      } else {
-        setMessage("Ajouté aux favoris !");
-      }
-    } catch (err) {
-      setMessage("Erreur serveur");
-    }
+    addFavorite(artist.id);
   };
 
-  // Rendu conditionnel
   if (error) return <p className="text-red-500 p-4">{error}</p>;
   if (!artist) return <p className="p-4">Chargement...</p>;
 
   return (
-    <div className="p-4 max-w-xl mx-auto">
-      <ArtistCard artist={artist} linkToDetail={false} />
-      {artist.description && <p className="mt-2">{artist.description}</p>}
+    <div className="p-6 max-w-xl mx-auto bg-white shadow rounded">
+      <h2 className="text-2xl font-bold mb-2">{artist.name}</h2>
+      {artist.genre && <p className="text-gray-600 mb-4">{artist.genre}</p>}
+      {artist.description && <p className="mb-6">{artist.description}</p>}
 
-      {/* Bouton visible seulement si connecté */}
       {user && (
-  <FavoriteButton artistId={artist.id} />
-)}
+        <button
+          onClick={handleAddFavorite}
+          disabled={isFavorite}
+          className={`w-full py-2 px-4 rounded transition ${
+            isFavorite
+              ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+              : "bg-yellow-400 text-black hover:bg-yellow-300"
+          }`}
+        >
+          {isFavorite ? "✔️ Déjà en favoris" : "★ Ajouter aux favoris"}
+        </button>
+      )}
     </div>
   );
 }
