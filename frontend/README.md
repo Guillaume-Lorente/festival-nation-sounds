@@ -32,9 +32,6 @@ frontend/
 ├── index.html
 └── README.md
 
-yaml
-Copier
-
 ---
 
 ## 🧭 Pages et navigation

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -74,6 +75,12 @@ export default function Login() {
         >
           Se connecter
         </button>
+<p className="mt-2 text-sm">
+  Pas encore de compte ?{" "}
+  <Link to="/register" className="text-blue-600 hover:underline">
+    Créez-en un ici
+  </Link>
+</p>
       </form>
     </div>
   );
