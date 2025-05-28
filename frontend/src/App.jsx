@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import ArtistDetail from "./pages/ArtistDetail";
 import Tickets from "./pages/Tickets";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/account" element={<Account />} />
+        <Route path="/account" element={<PrivateRoute><Account /></PrivateRoute>} />
         <Route path="/lineup" element={<Lineup />} />
         <Route path="/artist/:id" element={<ArtistDetail />} />
         <Route path="/tickets" element={<Tickets />} />

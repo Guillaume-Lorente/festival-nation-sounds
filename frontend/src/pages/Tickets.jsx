@@ -1,34 +1,32 @@
+// Tickets.jsx
+import { Link } from "react-router-dom";
+
 export default function Tickets() {
   return (
-    <div className="p-6 text-center max-w-xl mx-auto">
-      <h2 className="text-3xl font-bold mb-4">🎟️ Billetterie</h2>
-      <p className="mb-4 text-lg text-gray-700">
-        Préparez-vous à vivre l’expérience Nation Sounds Festival 2025 !
-      </p>
+    <div className="p-6 max-w-xl mx-auto text-center">
+      <h2 className="text-3xl font-bold mb-4">Billetterie 🎟️</h2>
 
-      {/* Message temporaire */}
-      <p className="mb-6 text-red-600 font-semibold">
-        🚧 La billetterie sera disponible très bientôt.
-      </p>
+      <p className="mb-6">Choisissez votre pass pour le festival :</p>
 
-      {/* Bouton fictif (ou lien vers un service réel si besoin) */}
-      <button
-        disabled
-        className="bg-gray-400 text-white px-6 py-3 rounded cursor-not-allowed"
-      >
-        Achat indisponible pour le moment
-      </button>
+      <div className="grid gap-6 sm:grid-cols-2">
+        <div className="border p-4 rounded-lg shadow hover:shadow-lg transition">
+          <h3 className="text-xl font-semibold">🎫 Pass 1 jour</h3>
+          <p className="text-sm text-gray-500 mb-2">Valable pour une journée au choix</p>
+          <p className="text-lg font-bold mb-2">25€</p>
+          <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded shadow hover:opacity-90 transition">Réserver</button>
+        </div>
 
-      {/* Lien réel si nécessaire
-      <a
-        href="https://example.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded"
-      >
-        Réserver maintenant
-      </a> 
-      */}
+        <div className="border p-4 rounded-lg shadow hover:shadow-lg transition">
+          <h3 className="text-xl font-semibold">🎟️ Pass 3 jours</h3>
+          <p className="text-sm text-gray-500 mb-2">Accès complet au festival</p>
+          <p className="text-lg font-bold mb-2">60€</p>
+          <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded shadow hover:opacity-90 transition">Réserver</button>
+        </div>
+      </div>
+
+      <Link to="/" className="inline-block mt-6 text-blue-600 hover:underline">
+        ← Retour à l'accueil
+      </Link>
     </div>
   );
 }

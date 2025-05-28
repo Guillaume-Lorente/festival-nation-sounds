@@ -9,7 +9,7 @@ Elle permet de consulter la programmation du festival, se connecter à un compte
 
 - **React.js** avec Vite
 - **React Router DOM** pour la navigation
-- **Tailwind CSS** pour le style
+- **Tailwind CSS version 3.4.3** pour le style car instabilité entre les environnements Tailwind CSS v4 et PostCSS/Vite actuel
 - **Thunder Client** / `fetch` pour interagir avec l'API
 - Stockage du `token` dans `localStorage`
 

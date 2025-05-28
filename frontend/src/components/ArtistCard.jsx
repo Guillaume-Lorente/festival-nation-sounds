@@ -1,8 +1,23 @@
 import { Link } from "react-router-dom";
-import FavoriteButton from "./FavoriteButton";
+import { useFavorites } from "../context/FavoritesContext";
+import { useState } from "react";
 
 export default function ArtistCard({ artist, linkToDetail = true }) {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const { favorites, addFavorite } = useFavorites();
+  const [message, setMessage] = useState("");
+
+  const isFavorite = favorites.some((fav) => fav.id === artist.id);
+
+  const handleAdd = async () => {
+    if (isFavorite) return;
+
+    const result = await addFavorite(artist.id);
+    if (result.success) {
+      setMessage(`✅ "${artist.name}" ajouté aux favoris`);
+    } else {
+      setMessage(result.error);
+    }
+  };
 
   return (
     <div className="p-4 border rounded shadow flex justify-between items-center">
@@ -20,9 +35,21 @@ export default function ArtistCard({ artist, linkToDetail = true }) {
         {artist.genre && <p className="text-sm text-gray-600">{artist.genre}</p>}
       </div>
 
-      {user && (
-        <FavoriteButton artistId={artist.id} />
-      )}
+      <div className="ml-4 text-right">
+        <button
+          onClick={handleAdd}
+          disabled={isFavorite}
+          className={`px-4 py-2 rounded ${
+            isFavorite
+              ? "bg-gray-300 cursor-not-allowed"
+              : "bg-yellow-400 text-black hover:bg-yellow-300"
+          }`}
+        >
+          {isFavorite ? "Ajouté" : "★ Ajouter aux favoris"}
+        </button>
+
+        {message && <p className="text-sm mt-1 text-green-600">{message}</p>}
+      </div>
     </div>
   );
 }

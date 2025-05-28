@@ -10,13 +10,6 @@ export default function Account() {
   const user = JSON.parse(localStorage.getItem("user"));
   const token = localStorage.getItem("token");
 
-  // Si non connecté → redirige vers /login
-  useEffect(() => {
-    if (!user || !token) {
-      navigate("/login");
-    }
-  }, [user, token, navigate]);
-
   // Récupère les favoris
   useEffect(() => {
     const fetchFavorites = async () => {
