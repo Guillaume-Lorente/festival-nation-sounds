@@ -9,10 +9,10 @@ exports.findByEmail = async (email) => {
 };
 
 // Créer un nouvel utilisateur
-exports.createUser = async ({ email, username, hashedPassword }) => {
+exports.createUser = async ({ email, username, password }) => {
   const result = await pool.query(
     "INSERT INTO users (email, username, password) VALUES ($1, $2, $3) RETURNING id, email, username",
-    [email, username, hashedPassword]
+    [email, username, password]
   );
   return result.rows[0];
 };
