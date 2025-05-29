@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFavorites } from "../context/FavoritesContext"; // ✅ On utilise maintenant le contexte
-import ArtistCard from "../components/ArtistCard";
+
 
 export default function Account() {
   const [error, setError] = useState("");

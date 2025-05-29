@@ -11,6 +11,9 @@ Elle permet de consulter la programmation du festival, se connecter à un compte
 - **React Router DOM** pour la navigation
 - **Tailwind CSS version 3.4.3** pour le style car instabilité entre les environnements Tailwind CSS v4 et PostCSS/Vite actuel
 - **Thunder Client** / `fetch` pour interagir avec l'API
+- Gestion des favoris via Context API
+- Auth via JWT (token dans `localStorage`)
+- Connexion à une API Node.js/Express
 - Stockage du `token` dans `localStorage`
 
 ---
@@ -19,13 +22,9 @@ Elle permet de consulter la programmation du festival, se connecter à un compte
 
 frontend/
 ├── src/
-│ ├── components/
-│ │ └── Header.jsx
-│ ├── pages/
-│ │ ├── Home.jsx
-│ │ ├── Lineup.jsx
-│ │ ├── Login.jsx
-│ │ └── Account.jsx
+│ ├── components/ # Composants génériques (Header, ArtistCard, etc.)
+│ ├── context/ # Contexts (CartContext, FavoritesContext)
+│ ├── pages/ # Pages (Home, Lineup, Login, etc.)
 │ ├── App.jsx
 │ └── main.jsx
 ├── public/
@@ -36,14 +35,17 @@ frontend/
 
 ## 🧭 Pages et navigation
 
-| URL        | Rôle                           |
-| ---------- | ------------------------------ |
-| `/`        | Accueil du site                |
-| `/login`   | Connexion de l’utilisateur     |
-| `/account` | Liste des artistes favoris     |
-| `/lineup`  | Liste des artistes du festival |
+| URL         | Fonction                             |
+| ----------- | ------------------------------------ |
+| `/`         | Page d’accueil                       |
+| `/lineup`   | Liste des artistes                   |
+| `/login`    | Connexion                            |
+| `/register` | Création de compte                   |
+| `/account`  | Profil utilisateur (favoris, logout) |
+| `/tickets`  | Choix de billets à acheter           |
+| `/cart`     | Récapitulatif + bouton de commande   |
 
-> L'accès à `/account` est protégé : nécessite un token valide dans `localStorage`.
+> ✅ Accès sécurisé aux pages sensibles (compte, favoris)
 
 ---
 
@@ -69,6 +71,15 @@ POST / api/users/:id/favorites
 Authorization: Bearer <token>
 
 L'utilisateur peut consulter ses favoris sur /account.
+
+---
+
+🛒 Panier
+Gestion via CartContext
+
+Page dédiée /cart avec compteur
+
+"Valider mon panier" (placeholder)
 
 ---
 
