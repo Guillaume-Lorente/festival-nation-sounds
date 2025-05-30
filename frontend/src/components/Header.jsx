@@ -36,78 +36,80 @@ export default function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  return (
-    <header className="bg-blue-600 text-white p-4 flex justify-between items-center relative">
-      <h1 className="text-lg font-bold">
-        <Link to="/">Nation Sounds</Link>
-      </h1>
+   return (
+    <header className="w-full bg-blue-700 text-yellow-400 font-bold font-size-xl">
+      <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+        <h1 className="text-xl font-bold">
+          <Link to="/" className="hover:bg-yellow-400">Nation Sounds</Link>
+        </h1>
 
-      <nav className="flex gap-4 items-center">
-        <Link to="/lineup" className="hover:underline">Line-up</Link>
-        <Link to="/tickets" className="hover:underline">Billetterie</Link>
+        <nav className="flex gap-4 items-center">
+          <Link to="/lineup" className="bg-yellow-500 text-white border border-white p-2 rounded-xl hover:bg-blue-400 duration-300">Programmation</Link>
+          <Link to="/lineup" className="bg-yellow-500 text-white border border-white p-2 rounded-xl hover:bg-blue-400 duration-300">Plan du festival</Link>
+          <Link to="/lineup" className="bg-yellow-500 text-white border border-white p-2 rounded-xl hover:bg-blue-400 duration-300">Infos Pratiques</Link>
+          <Link to="/tickets" className="bg-yellow-500 text-white border border-white p-2 rounded-xl hover:bg-blue-400 duration-300">Billetterie</Link>
 
-        {/* Panier */}
-        <Link to="/cart" className="relative hover:underline">
-          Mon panier
-          {totalItems > 0 && (
-            <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">
-              {totalItems}
-            </span>
-          )}
-        </Link>
+          <Link to="/cart" className="bg-yellow-500 text-white border border-white p-2 rounded-xl hover:bg-blue-400 duration-300">
+            Mon panier
+            {totalItems > 0 && (
+              <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">
+                {totalItems}
+              </span>
+            )}
+          </Link>
 
-        {/* Avatar & menu dropdown */}
-        <div className="relative" ref={menuRef}>
-          <button
-            onClick={toggleMenu}
-            className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-blue-600 hover:bg-gray-200"
-          >
-            <UserCircle className="w-6 h-6" />
-          </button>
+          <div className="relative" ref={menuRef}>
+            <button
+              onClick={toggleMenu}
+              className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-blue-600 hover:bg-gray-200"
+            >
+              <UserCircle className="w-6 h-6" />
+            </button>
 
-          {menuOpen && (
-            <div className="absolute right-0 mt-2 w-44 bg-white text-black shadow rounded z-50 py-2">
-              {!user ? (
-                <>
-                  <Link
-                    to="/login"
-                    className="block px-4 py-2 hover:bg-gray-100"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    Se connecter
-                  </Link>
-                  <Link
-                    to="/register"
-                    className="block px-4 py-2 hover:bg-gray-100"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    S’inscrire
-                  </Link>
-                </>
-              ) : (
-                <>
-                  <Link
-                    to="/account"
-                    className="block px-4 py-2 hover:bg-gray-100"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    Mon compte
-                  </Link>
-                  <button
-                    onClick={() => {
-                      setMenuOpen(false);
-                      handleLogout();
-                    }}
-                    className="w-full text-left px-4 py-2 hover:bg-gray-100"
-                  >
-                    Déconnexion
-                  </button>
-                </>
-              )}
-            </div>
-          )}
-        </div>
-      </nav>
+            {menuOpen && (
+              <div className="absolute right-0 mt-2 w-44 bg-white text-black shadow rounded z-50 py-2">
+                {!user ? (
+                  <>
+                    <Link
+                      to="/login"
+                      className="text-blue-600 block px-4 py-2 hover:bg-gray-100"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      Se connecter
+                    </Link>
+                    <Link
+                      to="/register"
+                      className="text-blue-600 block px-4 py-2 hover:bg-gray-100"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      S’inscrire
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      to="/account"
+                      className="text-blue-600 block px-4 py-2 hover:bg-gray-100"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      Mon compte
+                    </Link>
+                    <button
+                      onClick={() => {
+                        setMenuOpen(false);
+                        handleLogout();
+                      }}
+                      className="w-full text-left text-blue-600 px-4 py-2 hover:bg-gray-100"
+                    >
+                      Déconnexion
+                    </button>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
+        </nav>
+      </div>
     </header>
   );
 }
