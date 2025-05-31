@@ -13,6 +13,7 @@ export default function ArtistCard({ artist, linkToDetail = true }) {
   return (
     <div className="p-4 border rounded shadow flex justify-between items-center">
       <div>
+        <img src={artist.image_url} alt={artist.name} className="w-full h-40 object-cover rounded" />
         {/* 🔗 Lien vers la page détail si autorisé */}
         {linkToDetail ? (
           <Link
