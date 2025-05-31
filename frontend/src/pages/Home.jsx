@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import ArtistCard from "../components/ArtistCard";
 
 export default function Home() {
   const [artists, setArtists] = useState([]);
+  const carouselRef = useRef();
 
   useEffect(() => {
     fetch("http://localhost:5000/api/artists")
@@ -11,6 +12,14 @@ export default function Home() {
       .then((data) => setArtists(data))
       .catch((err) => console.error("Erreur de chargement des artistes :", err));
   }, []);
+
+  const scrollLeft = () => {
+    carouselRef.current.scrollBy({ left: -300, behavior: "smooth" });
+  };
+
+  const scrollRight = () => {
+    carouselRef.current.scrollBy({ left: 300, behavior: "smooth" });
+  };
 
   return (
     <main className="text-center">
@@ -46,17 +55,43 @@ export default function Home() {
       </div>
 
       {/* CARROUSEL D'ARTISTES */}
-      <section className="mt-12 px-4">
-        <h2 className="text-2xl font-semibold mb-4">Artistes en avant-première 🎤</h2>
-        <div className="overflow-x-auto">
-          <div className="flex gap-4 w-max">
-            {artists.map((artist) => (
-              <div key={artist.id} className="min-w-[250px]">
-                <ArtistCard artist={artist} />
-              </div>
-            ))}
-          </div>
+      <section className="mt-10 px-4 relative">
+        <h2 className="text-2xl font-bold mb-4">À l'affiche</h2>
+
+        {/* Flèches */}
+        <button
+          onClick={scrollLeft}
+          className="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 bg-blue-600 text-white p-2 rounded-full shadow z-10 hover:bg-blue-700"
+        >
+          ◀
+        </button>
+
+        <div
+          ref={carouselRef}
+          className="flex overflow-x-auto no-scrollbar gap-4 px-6"
+        >
+          {artists.map((artist) => (
+  <div key={artist.id} className="flex-shrink-0 w-64 mx-2">
+    <ArtistCard artist={artist} />
+  </div>
+))}
+<div className="flex-shrink-0 w-64 mx-2 bg-yellow-300 text-center p-6 rounded shadow hover:bg-yellow-200 transition cursor-pointer flex flex-col justify-center items-center">
+  <h3 className="text-xl text-red-600 font-semibold mb-2">Voir plus</h3>
+  <Link
+    to="/lineup"
+    className="text-blue-600 underline hover:text-blue-800"
+  >
+    Toute la programmation →
+  </Link>
+</div>
         </div>
+
+        <button
+          onClick={scrollRight}
+          className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 bg-blue-600 text-white p-2 rounded-full shadow z-10 hover:bg-blue-700"
+        >
+          ▶
+        </button>
       </section>
     </main>
   );
