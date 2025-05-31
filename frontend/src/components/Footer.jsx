@@ -20,12 +20,19 @@ export default function Footer() {
         <FaSpotify />
       </a>
       </span>
-      <span className ="flex justify-center text-xl gap-5 px-4 py-3">
-          <a href="#" target="_blank" className="hover:text-blue-300 duration-300">FAQ</a>| 
-          <a href="#" target="_blank" className="hover:text-blue-300 duration-300">Contact</a>| 
-          <a href="#" target="_blank" className="hover:text-blue-300 duration-300">Nos partenaires</a>| 
-          <a href="#" target="_blank" className="hover:text-blue-300 duration-300">Mentions Légales</a>
-      </span>
+
+      <span className="flex flex-col sm:flex-row justify-center items-center text-xl gap-3 sm:gap-5 px-4 py-3 text-center">
+  <a href="#" target="_blank" className="hover:text-blue-300 duration-300">FAQ</a>
+  <span className="hidden sm:inline">|</span>
+  
+  <a href="#" target="_blank" className="hover:text-blue-300 duration-300">Contact</a>
+  <span className="hidden sm:inline">|</span>
+  
+  <a href="#" target="_blank" className="hover:text-blue-300 duration-300">Nos partenaires</a>
+  <span className="hidden sm:inline">|</span>
+  
+  <a href="#" target="_blank" className="hover:text-blue-300 duration-300">Mentions Légales</a>
+</span>
       <p className="text-sm">
         &copy; {new Date().getFullYear()} Nation Sounds. Tous droits réservés.
       </p>

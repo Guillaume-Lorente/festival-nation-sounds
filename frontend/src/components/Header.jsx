@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { UserCircle } from "lucide-react";
+import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
 
 export default function Header() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -37,79 +38,97 @@ export default function Header() {
   }, []);
 
    return (
-    <header className="w-full bg-blue-700 text-yellow-400 font-bold font-size-xl">
-      <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-        <h1 className="text-xl font-bold">
-          <Link to="/" className="hover:bg-yellow-400">Nation Sounds</Link>
-        </h1>
+  <header className="w-full bg-blue-700 text-yellow-400 font-bold text-xl relative z-50">
+    <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      
+      {/* LOGO */}
+      <h1 className="text-xl font-bold">
+        <Link to="/" className="hover:bg-yellow-400 px-2 py-1 rounded">Nation Sounds</Link>
+      </h1>
 
-        <nav className="flex gap-4 items-center">
-          <Link to="/lineup" className="bg-yellow-500 text-white border border-white p-2 rounded-xl hover:bg-blue-400 duration-300">Programmation</Link>
-          <Link to="/lineup" className="bg-yellow-500 text-white border border-white p-2 rounded-xl hover:bg-blue-400 duration-300">Plan du festival</Link>
-          <Link to="/lineup" className="bg-yellow-500 text-white border border-white p-2 rounded-xl hover:bg-blue-400 duration-300">Infos Pratiques</Link>
-          <Link to="/tickets" className="bg-yellow-500 text-white border border-white p-2 rounded-xl hover:bg-blue-400 duration-300">Billetterie</Link>
+      {/* NAVIGATION DESKTOP */}
+      <nav className="hidden lg:flex gap-4 items-center">
+        <Link to="/lineup" className="min-w-[180px] text-center bg-yellow-500 text-white border border-white p-2 rounded-xl hover:bg-blue-400 duration-300">
+  Programmation
+</Link>
+<Link to="/map" className="min-w-[180px] text-center bg-yellow-500 text-white border border-white p-2 rounded-xl hover:bg-blue-400 duration-300">
+  Plan du festival
+</Link>
+<Link to="/info" className="min-w-[180px] text-center bg-yellow-500 text-white border border-white p-2 rounded-xl hover:bg-blue-400 duration-300">
+  Infos Pratiques
+</Link>
+<Link to="/tickets" className="min-w-[180px] text-center bg-yellow-500 text-white border border-white p-2 rounded-xl hover:bg-blue-400 duration-300">
+  Billetterie
+</Link>
 
-          <Link to="/cart" className="bg-yellow-500 text-white border border-white p-2 rounded-xl hover:bg-blue-400 duration-300">
-            Mon panier
-            {totalItems > 0 && (
-              <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">
-                {totalItems}
-              </span>
-            )}
-          </Link>
+{/* Possibilité de voir le panier */}
+{/* <Link to="/cart" className="min-w-[180px] text-center bg-yellow-500 text-white border border-white p-2 rounded-xl hover:bg-blue-400 duration-300 relative">
+  Mon panier
+  {totalItems > 0 && (
+    <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">
+      {totalItems}
+    </span>
+  )}
+</Link> */}
 
-          <div className="relative" ref={menuRef}>
-            <button
-              onClick={toggleMenu}
-              className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-blue-600 hover:bg-gray-200"
-            >
-              <UserCircle className="w-6 h-6" />
-            </button>
+        {/* AVATAR - visible uniquement en desktop */}
+        <div className="hidden md:block">
+          <button
+            onClick={() => navigate(user ? "/account" : "/login")}
+            className="text-white text-3xl hover:text-yellow-300"
+            title={user ? "Mon compte" : "Se connecter"}
+          >
+            <FaUserCircle />
+          </button>
+        </div>
+      </nav>
 
-            {menuOpen && (
-              <div className="absolute right-0 mt-2 w-44 bg-white text-black shadow rounded z-50 py-2">
-                {!user ? (
-                  <>
-                    <Link
-                      to="/login"
-                      className="text-blue-600 block px-4 py-2 hover:bg-gray-100"
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      Se connecter
-                    </Link>
-                    <Link
-                      to="/register"
-                      className="text-blue-600 block px-4 py-2 hover:bg-gray-100"
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      S’inscrire
-                    </Link>
-                  </>
-                ) : (
-                  <>
-                    <Link
-                      to="/account"
-                      className="text-blue-600 block px-4 py-2 hover:bg-gray-100"
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      Mon compte
-                    </Link>
-                    <button
-                      onClick={() => {
-                        setMenuOpen(false);
-                        handleLogout();
-                      }}
-                      className="w-full text-left text-blue-600 px-4 py-2 hover:bg-gray-100"
-                    >
-                      Déconnexion
-                    </button>
-                  </>
-                )}
-              </div>
+      {/* MENU BURGER MOBILE */}
+      <div className="lg:hidden relative" ref={menuRef}>
+        <button
+          onClick={toggleMenu}
+          className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-blue-600 hover:bg-gray-200"
+        >
+          {menuOpen ? <FaTimes className="w-5 h-5" /> : <FaBars className="w-5 h-5" />}
+        </button>
+
+        {/* MENU MOBILE SLIDE FROM RIGHT */}
+        <div
+          className={`fixed top-0 right-0 h-full w-64 bg-white text-black shadow-lg transform transition-transform duration-300 ${
+            menuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <div className="flex flex-col p-4 space-y-2 pt-16">
+            <Link to="/lineup" className="block px-4 py-2 hover:bg-gray-100" onClick={() => setMenuOpen(false)}>Programmation</Link>
+            <Link to="/map" className="block px-4 py-2 hover:bg-gray-100" onClick={() => setMenuOpen(false)}>Plan du festival</Link>
+            <Link to="/info" className="block px-4 py-2 hover:bg-gray-100" onClick={() => setMenuOpen(false)}>Infos Pratiques</Link>
+            <Link to="/tickets" className="block px-4 py-2 hover:bg-gray-100" onClick={() => setMenuOpen(false)}>Billetterie</Link>
+
+            <hr className="my-2" />
+
+            {!user ? (
+              <>
+                <Link to="/login" className="block px-4 py-2 text-blue-600 hover:bg-gray-100" onClick={() => setMenuOpen(false)}>Se connecter</Link>
+                <Link to="/register" className="block px-4 py-2 text-blue-600 hover:bg-gray-100" onClick={() => setMenuOpen(false)}>S’inscrire</Link>
+              </>
+            ) : (
+              <>
+                <Link to="/account" className="block px-4 py-2 text-blue-600 hover:bg-gray-100" onClick={() => setMenuOpen(false)}>Mon compte</Link>
+                <button
+                  onClick={() => {
+                    setMenuOpen(false);
+                    handleLogout();
+                  }}
+                  className="block w-full text-left px-4 py-2 text-blue-600 hover:bg-gray-100"
+                >
+                  Déconnexion
+                </button>
+              </>
             )}
           </div>
-        </nav>
+        </div>
       </div>
-    </header>
-  );
+    </div>
+  </header>
+);
 }

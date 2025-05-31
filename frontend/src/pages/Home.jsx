@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import ArtistCard from "../components/ArtistCard";
 
 export default function Home() {
   return (
