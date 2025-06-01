@@ -17,10 +17,21 @@ exports.findById = async (id) => {
 };
 
 // Récupère tous les événements d'un jour donné
+// DOW : 0 = Sunday, 1 = Monday, ..., 6 = Saturday
 exports.findByDay = async (day) => {
+  const dayMap = {
+    dimanche: 0,
+    lundi: 1,
+    mardi: 2,
+    mercredi: 3,
+    jeudi: 4,
+    vendredi: 5,
+    samedi: 6,
+  };
+  const dow = dayMap[day.toLowerCase()];
   const result = await pool.query(
-    `SELECT * FROM events WHERE TO_CHAR(date, 'Day') ILIKE $1`,
-    [`${day}%`]
+    `SELECT * FROM events WHERE EXTRACT(DOW FROM date) = $1`,
+    [dow]
   );
   return result.rows;
 };
