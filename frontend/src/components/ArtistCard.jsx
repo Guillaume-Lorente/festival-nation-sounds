@@ -24,7 +24,7 @@ export default function ArtistCard({ artist, linkToDetail = true }) {
 
       {linkToDetail ? (
         <Link
-          to={`/artists/${artist.id}`}
+          to={`/artist/${artist.id}`}
           className="text-lg font-bold text-red-600 block"
         >
           {artist.name}

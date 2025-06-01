@@ -10,6 +10,8 @@ import ArtistDetail from "./pages/ArtistDetail";
 import Tickets from "./pages/Tickets";
 import PrivateRoute from "./components/PrivateRoute";
 import Cart from "./pages/Cart";
+import InfosPratiques from "./pages/Informations";
+import Partenaires from "./pages/Partners";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
         <Route path="/account" element={<PrivateRoute><Account /></PrivateRoute>} />
         <Route path="/lineup" element={<Lineup />} />
         <Route path="/artist/:id" element={<ArtistDetail />} />
+        <Route path="/infos" element={<InfosPratiques />} />
+        <Route path="/partners" element={<Partenaires />} />
         <Route path="/tickets" element={<Tickets />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<NotFound />} />

@@ -87,6 +87,7 @@ export default function ArtistDetail() {
           )}
 
           {artist.spotify_url && (
+            <div className="mt-4 text-center">
             <a
               href={artist.spotify_url}
               target="_blank"
@@ -95,7 +96,16 @@ export default function ArtistDetail() {
             >
               🎧 Écouter sur Spotify
             </a>
+            </div>
           )}
+          <div className="mt-6 text-center">
+  <button
+    onClick={() => navigate("/lineup")}
+    className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+  >
+    ← Retour à la programmation
+  </button>
+</div>
         </div>
       </div>
 

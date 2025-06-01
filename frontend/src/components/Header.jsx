@@ -54,7 +54,7 @@ export default function Header() {
 <Link to="/map" className="min-w-[180px] text-center bg-yellow-500 text-white border border-white p-2 rounded-xl hover:bg-blue-400 duration-300">
   Plan du festival
 </Link>
-<Link to="/info" className="min-w-[180px] text-center bg-yellow-500 text-white border border-white p-2 rounded-xl hover:bg-blue-400 duration-300">
+<Link to="/s" className="min-w-[180px] text-center bg-yellow-500 text-white border border-white p-2 rounded-xl hover:bg-blue-400 duration-300">
   Infos Pratiques
 </Link>
 <Link to="/tickets" className="min-w-[180px] text-center bg-yellow-500 text-white border border-white p-2 rounded-xl hover:bg-blue-400 duration-300">
@@ -101,7 +101,7 @@ export default function Header() {
           <div className="flex flex-col p-4 space-y-2 pt-16">
             <Link to="/lineup" className="block px-4 py-2 hover:bg-gray-100" onClick={() => setMenuOpen(false)}>Programmation</Link>
             <Link to="/map" className="block px-4 py-2 hover:bg-gray-100" onClick={() => setMenuOpen(false)}>Plan du festival</Link>
-            <Link to="/info" className="block px-4 py-2 hover:bg-gray-100" onClick={() => setMenuOpen(false)}>Infos Pratiques</Link>
+            <Link to="/infos" className="block px-4 py-2 hover:bg-gray-100" onClick={() => setMenuOpen(false)}>Infos Pratiques</Link>
             <Link to="/tickets" className="block px-4 py-2 hover:bg-gray-100" onClick={() => setMenuOpen(false)}>Billetterie</Link>
 
             <hr className="my-2" />

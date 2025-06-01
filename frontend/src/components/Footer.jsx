@@ -28,7 +28,7 @@ export default function Footer() {
   <a href="#" target="_blank" className="hover:text-blue-300 duration-300">Contact</a>
   <span className="hidden sm:inline">|</span>
   
-  <a href="#" target="_blank" className="hover:text-blue-300 duration-300">Nos partenaires</a>
+  <a href="/partners" target="_blank" className="hover:text-blue-300 duration-300">Nos partenaires</a>
   <span className="hidden sm:inline">|</span>
   
   <a href="#" target="_blank" className="hover:text-blue-300 duration-300">Mentions Légales</a>
