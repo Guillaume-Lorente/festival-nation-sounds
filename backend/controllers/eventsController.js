@@ -1,9 +1,17 @@
 const eventsModel = require("../models/eventsModel");
 
-// GET /api/events
+// GET /api/events?day=
 exports.getAllEvents = async (req, res) => {
   try {
-    const events = await eventsModel.findAll();
+    const day = req.query.day; // ex: "vendredi"
+    let events;
+
+    if (day) {
+      events = await eventsModel.findByDay(day);
+    } else {
+      events = await eventsModel.findAll();
+    }
+
     res.json(events);
   } catch (error) {
     console.error("Erreur dans getAllEvents:", error);
