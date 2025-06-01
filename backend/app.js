@@ -25,7 +25,7 @@ app.use("/api/artists", artistsRoutes);
 app.use("/api/events", eventsRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/users", favoritesRoutes); // favorites rattaché aux users
-app.use("/api/map", mapRoutes);
+app.use("/api/map-areas", mapRoutes);
 
 // Export de l’app pour utilisation dans server.js
 module.exports = app;
