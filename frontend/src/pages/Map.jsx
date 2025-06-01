@@ -19,15 +19,22 @@ export default function Map() {
   }, []);
 
   useEffect(() => {
-    if (imageRef.current) {
-      const updateSize = () => {
-        const { width, height } = imageRef.current.getBoundingClientRect();
-        setImageSize({ width, height });
-      };
-      updateSize();
-      window.addEventListener("resize", updateSize);
-      return () => window.removeEventListener("resize", updateSize);
-    }
+    if (!imageRef.current) return;
+
+    const updateSize = () => {
+      const { width, height } = imageRef.current.getBoundingClientRect();
+      setImageSize({ width, height });
+    };
+
+    // 1. Met à jour dès maintenant
+    updateSize();
+
+    // 2. Observe les changements de taille
+    const observer = new ResizeObserver(() => updateSize());
+    observer.observe(imageRef.current);
+
+    // 3. Nettoyage
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -44,8 +51,8 @@ export default function Map() {
           key={area.id}
           className="absolute bg-blue-600 text-white text-xs px-2 py-1 rounded cursor-pointer hover:bg-blue-800 transition"
           style={{
-            top: `${(area.y_coord / imageSize.height) * 100}%`,
-            left: `${(area.x_coord / imageSize.width) * 100}%`,
+            top: `${(area.y_coord / 1024) * 100}%`,
+            left: `${(area.x_coord / 1024) * 100}%`,
             transform: "translate(-50%, -50%)"
           }}
           title={area.name}
