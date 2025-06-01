@@ -16,6 +16,15 @@ exports.findById = async (id) => {
   return result.rows[0];
 };
 
+// Récupère tous les événements d'un jour donné
+exports.findByDay = async (day) => {
+  const result = await pool.query(
+    `SELECT * FROM events WHERE TO_CHAR(date, 'Day') ILIKE $1`,
+    [`${day}%`]
+  );
+  return result.rows;
+};
+
 // Crée un nouvel événement
 exports.create = async ({ title, date, stage, artist_id }) => {
   const result = await pool.query(
