@@ -39,7 +39,7 @@ export default function AdminDashboard() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div
-          onClick={() => navigate("/admin/add-artist")}
+          onClick={() => navigate("/admin/artists")}
           className="p-4 bg-gray-100 rounded shadow cursor-pointer hover:bg-gray-200 transition"
         >
           <h2 className="text-lg font-semibold mb-2">🎤 Gérer les artistes</h2>
@@ -47,7 +47,7 @@ export default function AdminDashboard() {
         </div>
 
         <div
-          onClick={() => navigate("/admin/add-event")}
+          onClick={() => navigate("/admin/events")}
           className="p-4 bg-gray-100 rounded shadow cursor-pointer hover:bg-gray-200 transition"
         >
           <h2 className="text-lg font-semibold mb-2">🎟️ Gérer les événements</h2>
@@ -55,7 +55,7 @@ export default function AdminDashboard() {
         </div>
 
         <div
-          onClick={() => navigate("/admin/add-map-area")}
+          onClick={() => navigate("/admin/map-areas")}
           className="p-4 bg-gray-100 rounded shadow cursor-pointer hover:bg-gray-200 transition"
         >
           <h2 className="text-lg font-semibold mb-2">🗺️ Gérer les zones</h2>

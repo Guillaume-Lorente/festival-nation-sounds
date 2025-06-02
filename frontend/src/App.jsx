@@ -3,9 +3,9 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
-import AdminAddArtist from "./pages/AdminAddArtist";
-import AdminAddEvents from "./pages/AdminAddEvents";
-import AdminAddMapAreas from "./pages/AdminAddMapAreas";
+import AdminManageArtists from "./pages/AdminManageArtists";
+import AdminManageEvents from "./pages/AdminManageEvents";
+import AdminManageMapAreas from "./pages/AdminManageMapAreas";
 import PrivateAdminRoute from "./components/PrivateAdminRoute";
 import Lineup from "./pages/Lineup";
 import Account from "./pages/Account";
@@ -26,10 +26,10 @@ function App() {
     <Router>
       <Header />
       <Routes>
+        {/* Routes publiques */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/account" element={<PrivateRoute><Account /></PrivateRoute>} />
         <Route path="/lineup" element={<Lineup />} />
         <Route path="/map" element={<Map />} />
         <Route path="/artist/:id" element={<ArtistDetail />} />
@@ -38,18 +38,52 @@ function App() {
         <Route path="/tickets" element={<Tickets />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin/dashboard" element={
-  <PrivateAdminRoute><AdminDashboard /></PrivateAdminRoute>
-} />
-<Route path="/admin/add-artist" element={
-  <PrivateAdminRoute><AdminAddArtist /></PrivateAdminRoute>
-} />
-<Route path="/admin/add-event" element={
-  <PrivateAdminRoute><AdminAddEvents /></PrivateAdminRoute>
-} />
-<Route path="/admin/add-map-area" element={
-  <PrivateAdminRoute><AdminAddMapAreas /></PrivateAdminRoute>
-} />
+
+        {/* Routes utilisateur privé */}
+        <Route
+          path="/account"
+          element={
+            <PrivateRoute>
+              <Account />
+            </PrivateRoute>
+          }
+        />
+
+        {/* Routes admin privées */}
+        <Route
+          path="/admin/dashboard"
+          element={
+            <PrivateAdminRoute>
+              <AdminDashboard />
+            </PrivateAdminRoute>
+          }
+        />
+        <Route
+          path="/admin/artists"
+          element={
+            <PrivateAdminRoute>
+              <AdminManageArtists />
+            </PrivateAdminRoute>
+          }
+        />
+        <Route
+          path="/admin/events"
+          element={
+            <PrivateAdminRoute>
+              <AdminManageEvents />
+            </PrivateAdminRoute>
+          }
+        />
+        <Route
+          path="/admin/map-areas"
+          element={
+            <PrivateAdminRoute>
+              <AdminManageMapAreas />
+            </PrivateAdminRoute>
+          }
+        />
+
+        {/* 404 */}
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
