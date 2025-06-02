@@ -44,14 +44,22 @@ export default function AdminManageArtists() {
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6">🎤 Gestion des artistes</h1>
-
+    <div className="flex justify-between items-center mb-6">
+      <h1 className="text-2xl font-bold">🎤 Gestion des artistes</h1>
       <button
-        onClick={() => navigate("/admin/add-artist")}
-        className="mb-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+        onClick={() => navigate("/admin/dashboard")}
+        className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
       >
-        ➕ Ajouter un artiste
+        ⬅️ Retour au Dashboard
       </button>
+    </div>
+
+    <button
+      onClick={() => navigate("/admin/add-artist")}
+      className="mb-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+    >
+      ➕ Ajouter un artiste
+    </button>
 
       {artists.length === 0 ? (
         <p>Aucun artiste trouvé.</p>

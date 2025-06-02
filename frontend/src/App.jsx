@@ -6,6 +6,12 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminManageArtists from "./pages/AdminManageArtists";
 import AdminManageEvents from "./pages/AdminManageEvents";
 import AdminManageMapAreas from "./pages/AdminManageMapAreas";
+import AdminAddArtist from "./pages/AdminAddArtist";
+import AdminEditArtist from "./pages/AdminEditArtist";
+import AdminAddEvent from "./pages/AdminAddEvent";
+import AdminEditEvent from "./pages/AdminEditEvent";
+import AdminAddMapArea from "./pages/AdminAddMapArea";
+import AdminEditMapArea from "./pages/AdminEditMapArea";
 import PrivateAdminRoute from "./components/PrivateAdminRoute";
 import Lineup from "./pages/Lineup";
 import Account from "./pages/Account";
@@ -70,7 +76,7 @@ function App() {
           path="/admin/add-artist"
           element={
             <PrivateAdminRoute>
-              <AdminManageArtists />
+              <AdminAddArtist />
             </PrivateAdminRoute>
           }
         />
@@ -78,7 +84,7 @@ function App() {
           path="/admin/artists/:id"
           element={
             <PrivateAdminRoute>
-              <AdminManageArtists />
+              <AdminEditArtist />
             </PrivateAdminRoute>
           }
         />
@@ -94,7 +100,7 @@ function App() {
           path="/admin/add-event"
           element={
             <PrivateAdminRoute>
-              <AdminManageEvents />
+              <AdminAddEvent />
             </PrivateAdminRoute>
           }
         />
@@ -102,7 +108,7 @@ function App() {
           path="/admin/events/:id"
           element={
             <PrivateAdminRoute>
-              <AdminManageEvents />
+              <AdminEditEvent />
             </PrivateAdminRoute>
           }
         />
@@ -118,7 +124,7 @@ function App() {
           path="/admin/add-map-area"
           element={
             <PrivateAdminRoute>
-              <AdminManageMapAreas />
+              <AdminAddMapArea />
             </PrivateAdminRoute>
           }
         />
@@ -126,7 +132,7 @@ function App() {
           path="/admin/map-areas/:id"
           element={
             <PrivateAdminRoute>
-              <AdminManageMapAreas />
+              <AdminEditMapArea />
             </PrivateAdminRoute>
           }
         />
