@@ -45,13 +45,17 @@ export default function Home() {
         {/* HERO SECTION */}
         <div className="relative">
           <img
-            src="/images/photoAccueil.jpg"
-            alt="Photo de festivaliers"
-            className="w-full md:h-[600px] object-cover"
-          />
+  src="/images/photoAccueil.jpg"
+  alt="Photo de festivaliers"
+  className="w-full h-[80vh] sm:h-[80vh] md:h-[600px] object-cover"
+/>
 
           <section className="absolute inset-0 flex flex-col justify-center items-center bg-black/40 text-white px-6">
-            <h1 className="text-4xl font-bold mb-4">Nation Sounds Festival</h1>
+            <img
+  src="/images/NationSounds.png"
+  alt="Nation Sounds Festival"
+  className="h-20 mx-auto mb-4 object-contain"
+/>
             <p className="text-lg mb-6 max-w-2xl">
               L'événement musical de l'année ! Prépare-toi à vivre 3 jours inoubliables au rythme de la musique.
             </p>

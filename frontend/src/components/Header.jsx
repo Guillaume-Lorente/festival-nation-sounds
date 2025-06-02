@@ -42,9 +42,14 @@ export default function Header() {
     <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
       
       {/* LOGO */}
-      <h1 className="text-xl font-bold">
-        <Link to="/" className="hover:bg-yellow-400 px-2 py-1 rounded">Nation Sounds</Link>
-      </h1>
+      {/* LOGO */}
+<Link to="/">
+  <img
+    src="/images/NationSounds.png"
+    alt="Nation Sounds Logo"
+    className="h-10 object-contain"
+  />
+</Link>
 
       {/* NAVIGATION DESKTOP */}
       <nav className="hidden lg:flex gap-4 items-center">

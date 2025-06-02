@@ -32,7 +32,9 @@ import NotFound from "./pages/NotFound";
 function App() {
   return (
     <Router>
+      <div className="flex flex-col min-h-screen">
       <Header />
+      <main className="flex-grow">
       <Routes>
         {/* Routes publiques */}
         <Route path="/" element={<Home />} />
@@ -144,7 +146,9 @@ function App() {
         {/* 404 */}
         <Route path="*" element={<NotFound />} />
       </Routes>
+      </main>
       <Footer />
+      </div>
     </Router>
   );
 }
