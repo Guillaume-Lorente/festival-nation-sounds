@@ -25,6 +25,24 @@ exports.findByDay = async (day) => {
   return result.rows;
 };
 
+exports.findByMapAreaId = async (mapAreaId) => {
+  const result = await pool.query(
+    `SELECT 
+       e.id, 
+       e.date, 
+       a.name AS artist, 
+       a.genre, 
+       a.image_url, 
+       a.spotify_url
+     FROM events e
+     JOIN artists a ON e.artist_id = a.id
+     WHERE e.map_areas_id = $1
+     ORDER BY e.date ASC`,
+    [mapAreaId]
+  );
+  return result.rows;
+};
+
 // Crée un nouvel événement
 exports.create = async ({ title, date, stage, artist_id }) => {
   const result = await pool.query(

@@ -3,10 +3,12 @@ const eventsModel = require("../models/eventsModel");
 // GET /api/events?day=
 exports.getAllEvents = async (req, res) => {
   try {
-    const day = req.query.day; // ex: "vendredi"
+    const { day, map_area_id } = req.query;
     let events;
 
-    if (day) {
+    if (map_area_id) {
+      events = await eventsModel.findByMapAreaId(map_area_id); // ✅ AJOUTÉ
+    } else if (day) {
       events = await eventsModel.findByDay(day);
     } else {
       events = await eventsModel.findAll();
