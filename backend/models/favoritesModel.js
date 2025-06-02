@@ -3,7 +3,7 @@ const pool = require("../db");
 // Récupère les artistes favoris d’un utilisateur (avec nom des artistes)
 exports.findByUserId = async (userId) => {
   const result = await pool.query(
-    `SELECT a.id, a.name
+    `SELECT a.id, a.name, a.image_url
      FROM favorites f
      JOIN artists a ON f.artist_id = a.id
      WHERE f.user_id = $1`,
