@@ -54,7 +54,7 @@ export default function Header() {
 <Link to="/map" className="min-w-[180px] text-center bg-yellow-500 text-white border border-white p-2 rounded-xl hover:bg-blue-400 duration-300">
   Plan du festival
 </Link>
-<Link to="/s" className="min-w-[180px] text-center bg-yellow-500 text-white border border-white p-2 rounded-xl hover:bg-blue-400 duration-300">
+<Link to="/infos" className="min-w-[180px] text-center bg-yellow-500 text-white border border-white p-2 rounded-xl hover:bg-blue-400 duration-300">
   Infos Pratiques
 </Link>
 <Link to="/tickets" className="min-w-[180px] text-center bg-yellow-500 text-white border border-white p-2 rounded-xl hover:bg-blue-400 duration-300">
