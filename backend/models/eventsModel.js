@@ -45,6 +45,7 @@ exports.findByMapAreaId = async (mapAreaId) => {
        a.name AS artist, 
        a.genre, 
        a.image, 
+       a.image_url, 
        a.spotify_url
      FROM events e
      JOIN artists a ON e.artist_id = a.id
