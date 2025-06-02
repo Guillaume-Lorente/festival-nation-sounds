@@ -67,6 +67,22 @@ function App() {
           }
         />
         <Route
+          path="/admin/add-artist"
+          element={
+            <PrivateAdminRoute>
+              <AdminManageArtists />
+            </PrivateAdminRoute>
+          }
+        />
+        <Route
+          path="/admin/artists/:id"
+          element={
+            <PrivateAdminRoute>
+              <AdminManageArtists />
+            </PrivateAdminRoute>
+          }
+        />
+        <Route
           path="/admin/events"
           element={
             <PrivateAdminRoute>
@@ -75,7 +91,39 @@ function App() {
           }
         />
         <Route
+          path="/admin/add-event"
+          element={
+            <PrivateAdminRoute>
+              <AdminManageEvents />
+            </PrivateAdminRoute>
+          }
+        />
+        <Route
+          path="/admin/events/:id"
+          element={
+            <PrivateAdminRoute>
+              <AdminManageEvents />
+            </PrivateAdminRoute>
+          }
+        />
+        <Route
           path="/admin/map-areas"
+          element={
+            <PrivateAdminRoute>
+              <AdminManageMapAreas />
+            </PrivateAdminRoute>
+          }
+        />
+        <Route
+          path="/admin/add-map-area"
+          element={
+            <PrivateAdminRoute>
+              <AdminManageMapAreas />
+            </PrivateAdminRoute>
+          }
+        />
+        <Route
+          path="/admin/map-areas/:id"
           element={
             <PrivateAdminRoute>
               <AdminManageMapAreas />
