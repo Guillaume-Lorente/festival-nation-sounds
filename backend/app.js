@@ -19,6 +19,7 @@ const eventsRoutes = require("./routes/events");
 const usersRoutes = require("./routes/users");
 const favoritesRoutes = require("./routes/favorites");
 const mapAreasRoutes = require("./routes/mapAreas");
+const authRoutes = require("./routes/auth");
 
 // Montage des routes sur les préfixes d’API
 app.use("/api/artists", artistsRoutes);
@@ -26,6 +27,7 @@ app.use("/api/events", eventsRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/users", favoritesRoutes); // favorites rattaché aux users
 app.use("/api/map-areas", mapAreasRoutes);
+app.use("/api/auth", authRoutes);
 
 // Export de l’app pour utilisation dans server.js
 module.exports = app;
