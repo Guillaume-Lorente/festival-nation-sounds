@@ -44,7 +44,6 @@ exports.findByMapAreaId = async (mapAreaId) => {
        e.date, 
        a.name AS artist, 
        a.genre, 
-       a.image, 
        a.image_url, 
        a.spotify_url
      FROM events e
