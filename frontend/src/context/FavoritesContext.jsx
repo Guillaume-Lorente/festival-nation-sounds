@@ -15,28 +15,25 @@ export function FavoritesProvider({ children }) {
   const token = localStorage.getItem("token");
 
   // Récupération automatique des favoris à la connexion
-  useEffect(() => {
-    const fetchFavorites = async () => {
-      if (!user || !token) return;
+useEffect(() => {
+  const fetchFavorites = async () => {
+    if (!user || !token) return;
+    try {
+      const res = await fetch(`http://localhost:5000/api/users/${user.id}/favorites`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await res.json();
+      if (res.ok) setFavorites(data);
+    } catch (error) {
+      console.error("Erreur de chargement des favoris", error);
+    }
+  };
 
-      try {
-        const res = await fetch(
-          `http://localhost:5000/api/users/${user.id}/favorites`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        const data = await res.json();
-        if (res.ok) setFavorites(data);
-      } catch (error) {
-        console.error("Erreur de chargement des favoris", error);
-      }
-    };
-
-    fetchFavorites();
-  }, [user, token]);
+  fetchFavorites();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []); // ✅ appel unique au montage uniquement
 
   // Fonction pour ajouter un favori
   const addFavorite = async (artistId) => {
