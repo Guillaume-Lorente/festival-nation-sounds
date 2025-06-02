@@ -22,16 +22,16 @@ export default function Footer() {
       </span>
 
       <span className="flex flex-col sm:flex-row justify-center items-center text-xl gap-3 sm:gap-5 px-4 py-3 text-center">
-  <a href="#" target="_blank" className="hover:text-blue-300 duration-300">FAQ</a>
+  <a href="/infos" target="_blank" className="hover:text-blue-300 duration-300">FAQ</a>
   <span className="hidden sm:inline">|</span>
   
-  <a href="#" target="_blank" className="hover:text-blue-300 duration-300">Contact</a>
+  <a href="/contact" target="_blank" className="hover:text-blue-300 duration-300">Contact</a>
   <span className="hidden sm:inline">|</span>
   
   <a href="/partners" target="_blank" className="hover:text-blue-300 duration-300">Nos partenaires</a>
   <span className="hidden sm:inline">|</span>
   
-  <a href="#" target="_blank" className="hover:text-blue-300 duration-300">Mentions Légales</a>
+  <a href="/legalnotices" target="_blank" className="hover:text-blue-300 duration-300">Mentions Légales</a>
 </span>
       <p className="text-sm">
         &copy; {new Date().getFullYear()} Nation Sounds. Tous droits réservés.

@@ -25,6 +25,8 @@ import Map from "./pages/Map";
 import Cart from "./pages/Cart";
 import InfosPratiques from "./pages/Informations";
 import Partenaires from "./pages/Partners";
+import MentionsLegales from "./pages/legalnotices";
+import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -44,6 +46,8 @@ function App() {
         <Route path="/tickets" element={<Tickets />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/legalnotices" element={<MentionsLegales />} />
+        <Route path="/contact" element={<Contact />} />
 
         {/* Routes utilisateur privé */}
         <Route
