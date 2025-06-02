@@ -1,4 +1,13 @@
 import { useEffect, useState, useRef } from "react";
+import {
+  FaMusic,
+  FaBeer,
+  FaHamburger,
+  FaWater,
+  FaToilet,
+  FaDoorOpen,
+  FaMapMarkerAlt
+} from "react-icons/fa";
 
 export default function Map() {
   const [areas, setAreas] = useState([]);
@@ -26,16 +35,34 @@ export default function Map() {
       setImageSize({ width, height });
     };
 
-    // 1. Met à jour dès maintenant
     updateSize();
 
-    // 2. Observe les changements de taille
     const observer = new ResizeObserver(() => updateSize());
     observer.observe(imageRef.current);
 
-    // 3. Nettoyage
     return () => observer.disconnect();
   }, []);
+
+  // Fonction pour retourner l’icône en fonction du type
+  const getIconByType = (type) => {
+    switch (type.toLowerCase()) {
+      case "scène":
+        return <FaMusic size={20} />;
+      case "bar":
+        return <FaBeer size={20} />;
+      case "restauration":
+        return <FaHamburger size={20} />;
+      case "point d'eau":
+        return <FaWater size={20} />;
+      case "toilettes":
+        return <FaToilet size={20} />;
+      case "entrée":
+      case "entrée du festival":
+        return <FaDoorOpen size={20} />;
+      default:
+        return <FaMapMarkerAlt size={20} />;
+    }
+  };
 
   return (
     <div className="relative w-full max-w-5xl mx-auto mt-6">
@@ -49,7 +76,7 @@ export default function Map() {
       {areas.map((area) => (
         <div
           key={area.id}
-          className="absolute bg-blue-600 text-white text-xs px-2 py-1 rounded cursor-pointer hover:bg-blue-800 transition"
+          className="absolute bg-white text-blue-700 p-1 rounded-full shadow cursor-pointer hover:scale-110 transition"
           style={{
             top: `${(area.y_coord / 1024) * 100}%`,
             left: `${(area.x_coord / 1024) * 100}%`,
@@ -57,7 +84,7 @@ export default function Map() {
           }}
           title={area.name}
         >
-          {area.name}
+          {getIconByType(area.type)}
         </div>
       ))}
     </div>
