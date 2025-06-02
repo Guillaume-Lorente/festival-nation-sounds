@@ -1,6 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminAddArtist from "./pages/AdminAddArtist";
+import AdminAddEvents from "./pages/AdminAddEvents";
+import AdminAddMapAreas from "./pages/AdminAddMapAreas";
+import PrivateAdminRoute from "./components/PrivateAdminRoute";
 import Lineup from "./pages/Lineup";
 import Account from "./pages/Account";
 import Header from "./components/Header";
@@ -31,6 +37,19 @@ function App() {
         <Route path="/partners" element={<Partenaires />} />
         <Route path="/tickets" element={<Tickets />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/dashboard" element={
+  <PrivateAdminRoute><AdminDashboard /></PrivateAdminRoute>
+} />
+<Route path="/admin/add-artist" element={
+  <PrivateAdminRoute><AdminAddArtist /></PrivateAdminRoute>
+} />
+<Route path="/admin/add-event" element={
+  <PrivateAdminRoute><AdminAddEvents /></PrivateAdminRoute>
+} />
+<Route path="/admin/add-map-area" element={
+  <PrivateAdminRoute><AdminAddMapAreas /></PrivateAdminRoute>
+} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
