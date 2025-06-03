@@ -1,6 +1,6 @@
 const artistsModel = require("../models/artistsModel");
 
-// Contrôleur pour récupérer tous les artistes
+// GET /api/artists
 exports.getAllArtists = async (req, res) => {
   try {
     const artists = await artistsModel.findAll();
@@ -11,7 +11,7 @@ exports.getAllArtists = async (req, res) => {
   }
 };
 
-// Contrôleur pour récupérer un artiste par ID
+// GET /api/artists/:id
 exports.getArtistById = async (req, res) => {
   try {
     const artist = await artistsModel.findById(req.params.id);
@@ -27,7 +27,8 @@ exports.getArtistById = async (req, res) => {
 
 // POST /api/artists
 exports.createArtist = async (req, res) => {
-  const { name, genre, description, image_url } = req.body;
+  const { name, genre, description, image_url, spotify_url, youtube_url } =
+    req.body;
 
   if (!name) {
     return res.status(400).json({ error: "Le nom est requis." });
@@ -39,6 +40,8 @@ exports.createArtist = async (req, res) => {
       genre,
       description,
       image_url,
+      spotify_url,
+      youtube_url,
     });
     res.status(201).json(artist);
   } catch (error) {
@@ -49,7 +52,8 @@ exports.createArtist = async (req, res) => {
 
 // PUT /api/artists/:id
 exports.updateArtist = async (req, res) => {
-  const { name, genre, description, image_url } = req.body;
+  const { name, genre, description, image_url, spotify_url, youtube_url } =
+    req.body;
 
   try {
     const updated = await artistsModel.update(req.params.id, {
@@ -57,6 +61,8 @@ exports.updateArtist = async (req, res) => {
       genre,
       description,
       image_url,
+      spotify_url,
+      youtube_url,
     });
 
     if (!updated) {
