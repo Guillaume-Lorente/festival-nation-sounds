@@ -64,27 +64,30 @@ export default function Map() {
   }, []);
 
   const getIconByType = (type) => {
-    const normalized = type.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  const normalized = type
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s/g, ""); // Supprime les espaces
 
-    switch (normalized) {
-      case "stage":
-        return <FaMusic size={20} />;
-      case "bar":
-        return <FaBeer size={20} />;
-      case "restauration":
-        return <FaHamburger size={20} />;
-      case "point d'eau":
-      case "pointdeau":
-        return <FaWater size={20} />;
-      case "toilettes":
-        return <FaToilet size={20} />;
-      case "entree":
-      case "entree du festival":
-        return <FaDoorOpen size={20} />;
-      default:
-        return <FaMapMarkerAlt size={20} />;
-    }
-  };
+  switch (normalized) {
+    case "stage":
+      return <FaMusic size={20} />;
+    case "bar":
+      return <FaBeer size={20} />;
+    case "food":
+      return <FaHamburger size={20} />;
+    case "wateringplace":
+      return <FaWater size={20} />;
+    case "toilets":
+      return <FaToilet size={20} />;
+    case "entrance":
+      return <FaDoorOpen size={20} />;
+    default:
+      return <FaMapMarkerAlt size={20} />;
+  }
+};
 
   return (
     <div className="w-full max-w-5xl mx-auto mt-6">
