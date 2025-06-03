@@ -61,7 +61,7 @@ export default function AdminAddArtist() {
           className="border p-2 w-full"
         />
         <input
-          type="url"
+          type="text"
           placeholder="Image URL"
           value={formData.image_url}
           onChange={(e) =>
