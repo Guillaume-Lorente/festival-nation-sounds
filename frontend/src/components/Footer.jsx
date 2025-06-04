@@ -69,6 +69,18 @@ export default function Footer() {
         <a href="/legalnotices" className="hover:text-blue-300 duration-300">Mentions Légales</a>
       </nav>
 
+      <p className="mt-2">
+  <button
+    onClick={() => {
+      localStorage.removeItem("cookieConsent");
+      window.location.reload(); // Recharge pour réafficher la bannière
+    }}
+    className="text-sm hover:text-blue-300 duration-300"
+  >
+    Gérer mes cookies
+  </button>
+</p>
+
       {/* Copyright */}
       <p className="text-sm">
         &copy; {new Date().getFullYear()} Nation Sounds. Tous droits réservés.

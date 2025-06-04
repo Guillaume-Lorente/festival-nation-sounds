@@ -1,6 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminManageArtists from "./pages/AdminManageArtists";
@@ -13,6 +11,10 @@ import AdminEditEvent from "./pages/AdminEditEvent";
 import AdminAddMapArea from "./pages/AdminAddMapArea";
 import AdminEditMapArea from "./pages/AdminEditMapArea";
 import PrivateAdminRoute from "./components/PrivateAdminRoute";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import CookieBanner from "./components/CookieBanner";
+import CookiePolitics from "./pages/CookiePolitics";
 import Lineup from "./pages/Lineup";
 import Account from "./pages/Account";
 import Header from "./components/Header";
@@ -50,6 +52,7 @@ function App() {
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/legalnotices" element={<MentionsLegales />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/politique-cookies" element={<CookiePolitics />} />
 
         {/* Routes utilisateur privé */}
         <Route
@@ -148,6 +151,7 @@ function App() {
       </Routes>
       </main>
       <Footer />
+      <CookieBanner />
       </div>
     </Router>
   );
