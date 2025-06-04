@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import RecaptchaWrapper from "../components/RecaptchaWrapper"; // <-- important
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [recaptchaToken, setRecaptchaToken] = useState("");
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
@@ -30,11 +32,16 @@ export default function Register() {
       return;
     }
 
+    if (!recaptchaToken) {
+      setError("Veuillez valider le reCAPTCHA.");
+      return;
+    }
+
     try {
       const res = await fetch("http://localhost:5000/api/users/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, username, password }),
+        body: JSON.stringify({ email, username, password, recaptchaToken }),
       });
 
       const data = await res.json();
@@ -114,6 +121,8 @@ export default function Register() {
             aria-describedby={error ? "register-error" : undefined}
           />
         </div>
+
+        <RecaptchaWrapper onTokenChange={setRecaptchaToken} />
 
         <button
           type="submit"

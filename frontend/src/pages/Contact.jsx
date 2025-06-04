@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react"; // ✅ ajouter useState ici
+import RecaptchaWrapper from "../components/RecaptchaWrapper";
 
 export default function Contact() {
+  const [recaptchaToken, setRecaptchaToken] = useState("");
+
   return (
     <div className="p-6 max-w-2xl mx-auto">
       <h1 className="text-3xl font-bold mb-4">📬 Contact</h1>
@@ -84,6 +87,8 @@ export default function Contact() {
               disabled
             ></textarea>
           </div>
+
+          <RecaptchaWrapper onTokenChange={setRecaptchaToken} />
 
           <button
             type="submit"
