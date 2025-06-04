@@ -1,15 +1,40 @@
+const axios = require("axios");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const usersModel = require("../models/usersModel");
 
 // POST /api/register
 exports.register = async (req, res) => {
-  const { email, username, password } = req.body;
+  const { email, username, password, recaptchaToken } = req.body;
 
-  if (!email || !username || !password) {
+  if (!email || !username || !password || !recaptchaToken) {
     return res.status(400).json({ error: "Champs requis manquants" });
   }
 
+  // ✅ Vérification reCAPTCHA côté serveur
+  try {
+    const verification = await axios.post(
+      "https://www.google.com/recaptcha/api/siteverify",
+      null,
+      {
+        params: {
+          secret: process.env.RECAPTCHA_SECRET_KEY,
+          response: recaptchaToken,
+        },
+      }
+    );
+
+    if (!verification.data.success) {
+      return res
+        .status(400)
+        .json({ error: "Échec de la vérification reCAPTCHA." });
+    }
+  } catch (err) {
+    console.error("Erreur reCAPTCHA :", err.message);
+    return res.status(500).json({ error: "Erreur serveur reCAPTCHA." });
+  }
+
+  // ✅ Suite du traitement (utilisateur déjà existant, hash, etc.)
   try {
     const existingUser = await usersModel.findByEmail(email);
     if (existingUser) {
