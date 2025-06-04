@@ -1,8 +1,6 @@
-import React from "react";
-
 export default function MentionsLegales() {
   return (
-    <div className="p-6 max-w-3xl mx-auto">
+    <div className="p-6 max-w-3xl mx-auto" aria-label="Mentions légales du site">
       <h1 className="text-3xl font-bold mb-4">📄 Mentions légales</h1>
 
       <section className="mb-6">
@@ -16,7 +14,12 @@ export default function MentionsLegales() {
           75000 Paris, France
         </p>
         <p>SIRET : 123 456 789 00000</p>
-        <p>Email : contact@festivalnationsounds.fr</p>
+        <p>
+          Email :{" "}
+          <a href="mailto:contact@festivalnationsounds.fr" className="text-blue-600 underline hover:text-blue-800">
+            contact@festivalnationsounds.fr
+          </a>
+        </p>
       </section>
 
       <section className="mb-6">
@@ -33,7 +36,12 @@ export default function MentionsLegales() {
           2 rue Kellermann<br />
           59100 Roubaix, France
         </p>
-        <p>Site web : www.ovh.com</p>
+        <p>
+          Site web :{" "}
+          <a href="https://www.ovh.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline hover:text-blue-800">
+            www.ovh.com
+          </a>
+        </p>
       </section>
 
       <section className="mb-6">

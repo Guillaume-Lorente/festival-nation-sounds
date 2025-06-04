@@ -1,38 +1,75 @@
-import {FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaSpotify} from 'react-icons/fa';
+import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaSpotify } from 'react-icons/fa';
 
 export default function Footer() {
   return (
     <footer className="bg-blue-700 text-yellow-200 py-4 text-center mt-10">
-      <span className='flex justify-center text-3xl gap-5 px-4 py-3'>
-      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className='hover:text-blue-300 duration-300'>
-        <FaFacebook />
-      </a>
-      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className='hover:text-blue-300 duration-300'>
-        <FaTwitter />
-      </a>
-      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className='hover:text-blue-300 duration-300'>
-        <FaInstagram />
-      </a>
-      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className='hover:text-blue-300 duration-300'>
-        <FaLinkedin />
-      </a>
-      <a href="https://spotify.com" target="_blank" rel="noopener noreferrer" className='hover:text-blue-300 duration-300'>
-        <FaSpotify />
-      </a>
-      </span>
+      {/* Réseaux sociaux */}
+      <div className="flex justify-center text-3xl gap-5 px-4 py-3">
+        <a
+          href="https://facebook.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Lien vers notre page Facebook"
+          className="hover:text-blue-300 duration-300"
+        >
+          <FaFacebook />
+        </a>
+        <a
+          href="https://twitter.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Lien vers notre page Twitter"
+          className="hover:text-blue-300 duration-300"
+        >
+          <FaTwitter />
+        </a>
+        <a
+          href="https://instagram.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Lien vers notre page Instagram"
+          className="hover:text-blue-300 duration-300"
+        >
+          <FaInstagram />
+        </a>
+        <a
+          href="https://linkedin.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Lien vers notre page LinkedIn"
+          className="hover:text-blue-300 duration-300"
+        >
+          <FaLinkedin />
+        </a>
+        <a
+          href="https://spotify.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Lien vers notre page Spotify"
+          className="hover:text-blue-300 duration-300"
+        >
+          <FaSpotify />
+        </a>
+      </div>
 
-      <span className="flex flex-col sm:flex-row justify-center items-center text-xl gap-3 sm:gap-5 px-4 py-3 text-center">
-  <a href="/infos" target="_blank" className="hover:text-blue-300 duration-300">FAQ</a>
-  <span className="hidden sm:inline">|</span>
-  
-  <a href="/contact" target="_blank" className="hover:text-blue-300 duration-300">Contact</a>
-  <span className="hidden sm:inline">|</span>
-  
-  <a href="/partners" target="_blank" className="hover:text-blue-300 duration-300">Nos partenaires</a>
-  <span className="hidden sm:inline">|</span>
-  
-  <a href="/legalnotices" target="_blank" className="hover:text-blue-300 duration-300">Mentions Légales</a>
-</span>
+      {/* Liens d'information */}
+      <nav
+        className="flex flex-col sm:flex-row justify-center items-center text-xl gap-3 sm:gap-5 px-4 py-3 text-center"
+        aria-label="Liens d'informations secondaires"
+      >
+        <a href="/infos" className="hover:text-blue-300 duration-300">FAQ</a>
+        <span className="hidden sm:inline">|</span>
+
+        <a href="/contact" className="hover:text-blue-300 duration-300">Contact</a>
+        <span className="hidden sm:inline">|</span>
+
+        <a href="/partners" className="hover:text-blue-300 duration-300">Nos partenaires</a>
+        <span className="hidden sm:inline">|</span>
+
+        <a href="/legalnotices" className="hover:text-blue-300 duration-300">Mentions Légales</a>
+      </nav>
+
+      {/* Copyright */}
       <p className="text-sm">
         &copy; {new Date().getFullYear()} Nation Sounds. Tous droits réservés.
       </p>

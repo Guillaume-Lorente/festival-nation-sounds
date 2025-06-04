@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -8,7 +7,6 @@ export default function Login() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // 🔐 Redirige si déjà connecté
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) navigate("/account");
@@ -42,30 +40,52 @@ export default function Login() {
 
   return (
     <div className="p-6 max-w-md mx-auto">
-      <h2 className="text-2xl font-bold mb-6 text-center">Connexion</h2>
+      <h1 className="text-3xl font-bold mb-6 text-center">Connexion à votre compte</h1>
 
-      {error && <p className="text-red-600 mb-4">{error}</p>}
+      {error && (
+        <p
+          className="text-red-600 mb-4"
+          role="alert"
+          id="login-error"
+        >
+          {error}
+        </p>
+      )}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4" noValidate>
         <div>
-          <label className="block font-medium mb-1">Email</label>
+          <label htmlFor="email" className="block font-medium mb-1">
+            Email
+          </label>
           <input
+            id="email"
+            name="email"
             type="email"
             className="w-full border rounded p-2"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            aria-invalid={!!error}
+            aria-describedby={error ? "login-error" : undefined}
+            autoComplete="email"
           />
         </div>
 
         <div>
-          <label className="block font-medium mb-1">Mot de passe</label>
+          <label htmlFor="password" className="block font-medium mb-1">
+            Mot de passe
+          </label>
           <input
+            id="password"
+            name="password"
             type="password"
             className="w-full border rounded p-2"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            aria-invalid={!!error}
+            aria-describedby={error ? "login-error" : undefined}
+            autoComplete="current-password"
           />
         </div>
 
@@ -75,12 +95,13 @@ export default function Login() {
         >
           Se connecter
         </button>
-<p className="mt-2 text-sm">
-  Pas encore de compte ?{" "}
-  <Link to="/register" className="text-blue-600 hover:underline">
-    Créez-en un ici
-  </Link>
-</p>
+
+        <p className="mt-2 text-sm text-center">
+          Pas encore de compte ?{" "}
+          <Link to="/register" className="text-blue-600 hover:underline">
+            Créez-en un ici
+          </Link>
+        </p>
       </form>
     </div>
   );

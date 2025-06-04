@@ -8,7 +8,12 @@ export default function ArtistCard({ artist, linkToDetail = true }) {
   // 🔄 On récupère les favoris et la fonction d’ajout depuis le contexte
   const { favorites, addFavorite } = useContext(FavoritesContext);
 
-   const isAlreadyFavorite = favorites.some((fav) => fav.id === artist.id);
+  const isAlreadyFavorite = favorites.some((fav) => fav.id === artist.id);
+
+  const handleImageError = (e) => {
+    e.target.src = "/images/default-artist.png"; // Fallback image
+    e.target.alt = "Image non disponible";
+  };
 
   return (
   <div className="bg-yellow-300 p-4 border rounded shadow flex flex-col justify-between w-full">
@@ -18,6 +23,7 @@ export default function ArtistCard({ artist, linkToDetail = true }) {
         <img
           src={artist.image_url}
           alt={artist.name}
+          onError={handleImageError}
           className="w-full h-full object-cover rounded-xl"
         />
       </div>
@@ -41,21 +47,27 @@ export default function ArtistCard({ artist, linkToDetail = true }) {
     {/* Bouton favori en bas */}
     <button
       onClick={() => {
-        if (!user) {
-          alert("Veuillez vous connecter pour ajouter un favori.");
-          return;
+          if (!user) {
+            alert("Veuillez vous connecter pour ajouter un favori.");
+            return;
+          }
+          addFavorite(artist.id);
+        }}
+        disabled={isAlreadyFavorite}
+        aria-pressed={isAlreadyFavorite}
+        aria-label={
+          isAlreadyFavorite
+            ? `${artist.name} est déjà dans vos favoris`
+            : `Ajouter ${artist.name} aux favoris`
         }
-        addFavorite(artist.id);
-      }}
-      disabled={isAlreadyFavorite}
-      className={`mt-4 w-full px-4 py-2 rounded transition-all duration-200 ${
-        isAlreadyFavorite
-          ? "bg-gray-300 text-gray-600 cursor-not-allowed"
-          : "bg-yellow-400 text-black hover:bg-yellow-300"
-      }`}
-    >
-      {isAlreadyFavorite ? "✔️ Déjà en favoris" : "★ Ajouter aux favoris"}
-    </button>
+        className={`mt-4 w-full px-4 py-2 rounded transition-all duration-200 ${
+          isAlreadyFavorite
+            ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+            : "bg-yellow-400 text-black hover:bg-yellow-300"
+        }`}
+      >
+        {isAlreadyFavorite ? "✔️ Déjà en favoris" : "★ Ajouter aux favoris"}
+      </button>
   </div>
 );
 }

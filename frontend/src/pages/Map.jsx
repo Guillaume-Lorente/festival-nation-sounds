@@ -49,51 +49,51 @@ export default function Map() {
 
   useEffect(() => {
     if (!imageRef.current) return;
-
     const updateSize = () => {
       const { width, height } = imageRef.current.getBoundingClientRect();
       setImageSize({ width, height });
     };
-
     updateSize();
-
-    const observer = new ResizeObserver(() => updateSize());
+    const observer = new ResizeObserver(updateSize);
     observer.observe(imageRef.current);
-
     return () => observer.disconnect();
   }, []);
 
   const getIconByType = (type) => {
-  const normalized = type
-    .trim()
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/\s/g, ""); // Supprime les espaces
+    const normalized = type
+      .trim()
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/\s/g, "");
 
-  switch (normalized) {
-    case "stage":
-      return <FaMusic size={20} />;
-    case "bar":
-      return <FaBeer size={20} />;
-    case "food":
-      return <FaHamburger size={20} />;
-    case "wateringplace":
-      return <FaWater size={20} />;
-    case "toilets":
-      return <FaToilet size={20} />;
-    case "entrance":
-      return <FaDoorOpen size={20} />;
-    default:
-      return <FaMapMarkerAlt size={20} />;
-  }
-};
+    switch (normalized) {
+      case "stage":
+        return <FaMusic size={20} />;
+      case "bar":
+        return <FaBeer size={20} />;
+      case "food":
+        return <FaHamburger size={20} />;
+      case "wateringplace":
+        return <FaWater size={20} />;
+      case "toilets":
+        return <FaToilet size={20} />;
+      case "entrance":
+        return <FaDoorOpen size={20} />;
+      default:
+        return <FaMapMarkerAlt size={20} />;
+    }
+  };
 
   return (
     <div className="w-full max-w-5xl mx-auto mt-6">
-      <div className="flex flex-wrap gap-2 justify-center mb-4">
+      <h1 className="text-3xl font-bold text-center mb-4">Plan du festival !</h1>
+
+      <div className="flex flex-wrap gap-2 justify-center mb-4" role="group" aria-label="Filtres des zones de la carte">
         <button
           onClick={() => setVisibleTypes(typeOptions.map((opt) => opt.key))}
+          aria-pressed={visibleTypes.length === typeOptions.length}
+          aria-label="Afficher toutes les zones"
           className={`flex items-center gap-2 px-3 py-1 rounded-full border text-sm transition ${
             visibleTypes.length === typeOptions.length
               ? "bg-blue-600 text-white"
@@ -107,12 +107,13 @@ export default function Map() {
           <button
             key={key}
             onClick={() => setVisibleTypes([key])}
-            className={`flex items-center gap-2 px-3 py-1 rounded-full border text-sm transition
-              ${
-                visibleTypes.includes(key) && visibleTypes.length === 1
-                  ? "bg-blue-600 text-white"
-                  : "bg-white text-gray-700"
-              }`}
+            aria-pressed={visibleTypes.includes(key) && visibleTypes.length === 1}
+            aria-label={`Filtrer par zone : ${label}`}
+            className={`flex items-center gap-2 px-3 py-1 rounded-full border text-sm transition ${
+              visibleTypes.includes(key) && visibleTypes.length === 1
+                ? "bg-blue-600 text-white"
+                : "bg-white text-gray-700"
+            }`}
           >
             {icon}
             {label}
@@ -137,17 +138,12 @@ export default function Map() {
           .map((area) => (
             <div
               key={area.id}
-              className="absolute bg-white text-blue-700 p-1 rounded-full shadow cursor-pointer hover:scale-110 transition"
-              style={{
-                top: `${(area.y_coord / 1024) * 100}%`,
-                left: `${(area.x_coord / 1024) * 100}%`,
-                transform: "translate(-50%, -50%)",
-              }}
-              title={area.name}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === "Enter" && setSelectedArea(area)}
               onClick={() => {
                 setSelectedArea(area);
                 setVisibleArea(area);
-
                 if (area.type.toLowerCase() === "stage") {
                   fetch(`http://localhost:5000/api/events?map_area_id=${area.id}`)
                     .then((res) => res.json())
@@ -157,6 +153,14 @@ export default function Map() {
                   setEvents([]);
                 }
               }}
+              aria-label={`Zone : ${area.name}`}
+              className="absolute bg-white text-blue-700 p-1 rounded-full shadow hover:scale-110 transition"
+              style={{
+                top: `${(area.y_coord / 1024) * 100}%`,
+                left: `${(area.x_coord / 1024) * 100}%`,
+                transform: "translate(-50%, -50%)",
+              }}
+              title={area.name}
             >
               {getIconByType(area.type)}
             </div>
@@ -166,6 +170,9 @@ export default function Map() {
         {selectedArea && (
           <div
             className="absolute bg-white text-black p-3 rounded-lg shadow-lg z-50 w-[16rem] hidden sm:block"
+            role="dialog"
+            aria-labelledby="tooltipTitle"
+            aria-modal="true"
             style={{
               top: `${(selectedArea.y_coord / 1024) * 100}%`,
               left: `${(selectedArea.x_coord / 1024) * 100}%`,
@@ -174,13 +181,14 @@ export default function Map() {
             }}
           >
             <div className="flex justify-between items-start">
-              <strong>{selectedArea.name}</strong>
+              <strong id="tooltipTitle">{selectedArea.name}</strong>
               <button
                 onClick={() => {
                   setVisibleArea(null);
                   setTimeout(() => setSelectedArea(null), 300);
                 }}
                 className="ml-2 text-gray-500 hover:text-black"
+                aria-label="Fermer la zone"
               >
                 ×
               </button>
@@ -227,15 +235,21 @@ export default function Map() {
 
         {/* Modal Mobile */}
         {selectedArea && (
-          <div className="fixed bottom-0 left-0 right-0 bg-white p-4 z-50 rounded-t-lg shadow-md sm:hidden">
+          <div
+            className="fixed bottom-0 left-0 right-0 bg-white p-4 z-50 rounded-t-lg shadow-md sm:hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="mobileAreaTitle"
+          >
             <div className="flex justify-between items-center">
-              <strong>{selectedArea.name}</strong>
+              <strong id="mobileAreaTitle">{selectedArea.name}</strong>
               <button
                 onClick={() => {
                   setVisibleArea(null);
                   setTimeout(() => setSelectedArea(null), 300);
                 }}
                 className="text-gray-500 hover:text-black"
+                aria-label="Fermer la zone"
               >
                 ×
               </button>

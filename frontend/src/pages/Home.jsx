@@ -5,7 +5,7 @@ import ArtistCard from "../components/ArtistCard";
 export default function Home() {
   const [artists, setArtists] = useState([]);
   const [showAlert, setShowAlert] = useState(true);
-  const [importantInfo, setImportantInfo] = useState("")
+  const [importantInfo, setImportantInfo] = useState("");
   const carouselRef = useRef();
 
   useEffect(() => {
@@ -14,9 +14,9 @@ export default function Home() {
       .then((data) => setArtists(data))
       .catch((err) => console.error("Erreur de chargement des artistes :", err));
 
-  // Message d’alerte temporaire
     setImportantInfo("Changement de dernière minute : la scène Vortex ouvrira 1h plus tard !");
   }, []);
+
   const scrollLeft = () => {
     carouselRef.current.scrollBy({ left: -300, behavior: "smooth" });
   };
@@ -25,16 +25,17 @@ export default function Home() {
     carouselRef.current.scrollBy({ left: 300, behavior: "smooth" });
   };
 
- return (
+  return (
     <>
+      {/* ALERTE IMPORTANTE */}
       {showAlert && importantInfo && (
-        <div className="bg-red-100 border border-red-400 text-red-800 px-4 py-3 text-center relative z-50">
+        <div className="bg-red-100 border border-red-400 text-red-800 px-4 py-3 text-center relative z-50" role="alert">
           <strong className="font-bold">Annonce importante : </strong>
           <span>{importantInfo}</span>
           <button
             onClick={() => setShowAlert(false)}
             className="absolute right-4 top-2 text-xl hover:text-red-600"
-            aria-label="Fermer"
+            aria-label="Fermer l'alerte"
           >
             ✖
           </button>
@@ -42,20 +43,21 @@ export default function Home() {
       )}
 
       <main className="text-center">
-        {/* HERO SECTION */}
+        {/* HERO */}
         <div className="relative">
           <img
-  src="/images/photoAccueil.jpg"
-  alt="Photo de festivaliers"
-  className="w-full h-[80vh] sm:h-[80vh] md:h-[600px] object-cover"
-/>
+            src="/images/photoAccueil.jpg"
+            alt="Photo de festivaliers"
+            className="w-full h-[80vh] sm:h-[80vh] md:h-[600px] object-cover"
+          />
 
           <section className="absolute inset-0 flex flex-col justify-center items-center bg-black/40 text-white px-6">
+            <h1 className="sr-only">Festival Nation Sounds</h1> {/* Accessibilité & SEO */}
             <img
-  src="/images/NationSounds.png"
-  alt="Nation Sounds Festival"
-  className="h-20 mx-auto mb-4 object-contain"
-/>
+              src="/images/NationSounds.png"
+              alt="Nation Sounds Festival"
+              className="h-20 mx-auto mb-4 object-contain"
+            />
             <p className="text-lg mb-6 max-w-2xl">
               L'événement musical de l'année ! Prépare-toi à vivre 3 jours inoubliables au rythme de la musique.
             </p>
@@ -77,13 +79,14 @@ export default function Home() {
           </section>
         </div>
 
-        {/* CARROUSEL D'ARTISTES */}
-        <section className="mt-10 px-4 relative">
+        {/* SECTION ARTISTES */}
+        <section className="mt-10 px-4 relative" aria-label="Artistes à l'affiche">
           <h2 className="text-2xl font-bold mb-4">À l'affiche</h2>
 
           <button
             onClick={scrollLeft}
             className="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 bg-blue-600 text-white p-2 rounded-full shadow z-10 hover:bg-blue-700"
+            aria-label="Faire défiler vers la gauche"
           >
             ◀
           </button>
@@ -97,6 +100,7 @@ export default function Home() {
                 <ArtistCard artist={artist} />
               </div>
             ))}
+
             <div className="flex-shrink-0 w-64 mx-2 bg-yellow-300 text-center p-6 rounded shadow hover:bg-yellow-200 transition cursor-pointer flex flex-col justify-center items-center">
               <h3 className="text-xl text-red-600 font-semibold mb-2">Voir plus</h3>
               <Link to="/lineup" className="text-blue-600 underline hover:text-blue-800">
@@ -108,6 +112,7 @@ export default function Home() {
           <button
             onClick={scrollRight}
             className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 bg-blue-600 text-white p-2 rounded-full shadow z-10 hover:bg-blue-700"
+            aria-label="Faire défiler vers la droite"
           >
             ▶
           </button>

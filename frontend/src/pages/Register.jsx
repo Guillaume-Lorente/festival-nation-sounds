@@ -40,41 +40,70 @@ export default function Register() {
 
   return (
     <div className="p-6 max-w-md mx-auto">
-      <h2 className="text-2xl font-bold mb-6 text-center">Inscription</h2>
+      <h1 className="text-3xl font-bold mb-6 text-center">Créer un compte</h1>
 
-      {error && <p className="text-red-600 mb-4">{error}</p>}
+      {error && (
+        <p
+          className="text-red-600 mb-4"
+          role="alert"
+          id="register-error"
+        >
+          {error}
+        </p>
+      )}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4" noValidate>
         <div>
-          <label className="block font-medium mb-1">Email</label>
+          <label htmlFor="email" className="block font-medium mb-1">
+            Email
+          </label>
           <input
+            id="email"
+            name="email"
             type="email"
             className="w-full border rounded p-2"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            autoComplete="email"
+            aria-invalid={!!error}
+            aria-describedby={error ? "register-error" : undefined}
           />
         </div>
 
         <div>
-          <label className="block font-medium mb-1">Nom d'utilisateur</label>
+          <label htmlFor="username" className="block font-medium mb-1">
+            Nom d'utilisateur
+          </label>
           <input
+            id="username"
+            name="username"
             type="text"
             className="w-full border rounded p-2"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
+            autoComplete="username"
+            aria-invalid={!!error}
+            aria-describedby={error ? "register-error" : undefined}
           />
         </div>
 
         <div>
-          <label className="block font-medium mb-1">Mot de passe</label>
+          <label htmlFor="password" className="block font-medium mb-1">
+            Mot de passe
+          </label>
           <input
+            id="password"
+            name="password"
             type="password"
             className="w-full border rounded p-2"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            autoComplete="new-password"
+            aria-invalid={!!error}
+            aria-describedby={error ? "register-error" : undefined}
           />
         </div>
 
