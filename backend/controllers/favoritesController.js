@@ -1,4 +1,5 @@
 const favoritesModel = require("../models/favoritesModel");
+const pool = require("../db"); // Ajout nécessaire pour requête directe à artists
 
 // GET /api/users/:id/favorites
 exports.getUserFavorites = async (req, res) => {
@@ -22,8 +23,20 @@ exports.addFavorite = async (req, res) => {
   }
 
   try {
-    const favorite = await favoritesModel.addFavorite(userId, artist_id);
-    res.status(201).json(favorite);
+    // Ajoute le favori dans la table favorites
+    await favoritesModel.addFavorite(userId, artist_id);
+
+    // Récupère l'artiste complet
+    const result = await pool.query(
+      "SELECT id, name, genre, image_url FROM artists WHERE id = $1",
+      [artist_id]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: "Artiste introuvable" });
+    }
+
+    res.status(201).json(result.rows[0]); // Renvoie l'artiste complet
   } catch (error) {
     console.error("Erreur dans addFavorite:", error);
     res.status(500).json({ error: "Erreur serveur" });
