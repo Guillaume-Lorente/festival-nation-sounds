@@ -14,9 +14,21 @@ export default function Register() {
     if (user) navigate("/account");
   }, [navigate]);
 
+  const isStrongPassword = (password) => {
+    const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&_.,;:])[A-Za-z\d@$!%*?#&_.,;:]{8,}$/;
+    return strongRegex.test(password);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+
+    if (!isStrongPassword(password)) {
+      setError(
+        "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un symbole."
+      );
+      return;
+    }
 
     try {
       const res = await fetch("http://localhost:5000/api/users/register", {
@@ -43,11 +55,7 @@ export default function Register() {
       <h1 className="text-3xl font-bold mb-6 text-center">Créer un compte</h1>
 
       {error && (
-        <p
-          className="text-red-600 mb-4"
-          role="alert"
-          id="register-error"
-        >
+        <p className="text-red-600 mb-4" role="alert" id="register-error">
           {error}
         </p>
       )}
