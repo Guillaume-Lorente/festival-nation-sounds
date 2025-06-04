@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const usersController = require("../controllers/usersController");
 const verifyToken = require("../middlewares/authMiddleware");
-const validatePasswordStrength = require("../middlewares/validatePasswordStrength");
+const validatePasswordStrength = require("../middlewares/validatePasswordStrenght");
 
 // Inscription
 router.post("/register", validatePasswordStrength, usersController.register);
