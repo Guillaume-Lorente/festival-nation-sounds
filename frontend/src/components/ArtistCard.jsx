@@ -16,7 +16,7 @@ export default function ArtistCard({ artist, linkToDetail = true }) {
   };
 
   return (
-  <div className="bg-yellow-300 p-4 border rounded shadow flex flex-col justify-between w-full">
+  <div className="bg-yellow-400 p-4 border rounded-xl shadow flex flex-col justify-between w-full">
     {/* Partie image + texte centrée */}
     <div className="text-center">
       <div className="w-full mb-2">
@@ -31,7 +31,7 @@ export default function ArtistCard({ artist, linkToDetail = true }) {
       {linkToDetail ? (
         <Link
           to={`/artist/${artist.id}`}
-          className="text-lg font-bold text-red-600 block"
+          className="text-xl font-bold text-red-600 block"
         >
           {artist.name}
         </Link>
@@ -40,7 +40,7 @@ export default function ArtistCard({ artist, linkToDetail = true }) {
       )}
 
       {artist.genre && (
-        <p className="text-md text-gray-600">{artist.genre}</p>
+        <p className="text-md text-black-600">{artist.genre}</p>
       )}
     </div>
 
@@ -62,8 +62,8 @@ export default function ArtistCard({ artist, linkToDetail = true }) {
         }
         className={`mt-4 w-full px-4 py-2 rounded transition-all duration-200 ${
           isAlreadyFavorite
-            ? "bg-gray-300 text-gray-600 cursor-not-allowed"
-            : "bg-yellow-400 text-black hover:bg-yellow-300"
+            ? "bg-blue-200 text-yellow-600 cursor-not-allowed"
+            : "bg-blue-600 text-yellow-300 hover:bg-blue-300"
         }`}
       >
         {isAlreadyFavorite ? "✔️ Déjà en favoris" : "★ Ajouter aux favoris"}

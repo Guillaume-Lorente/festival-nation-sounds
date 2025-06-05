@@ -35,14 +35,20 @@ export default function AdminAddEvent() {
 
   return (
     <div className="p-6 max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">➕ Ajouter un événement</h1>
+      <h1 className="text-2xl text-blue-600 font-bold mb-4">➕ Ajouter un événement</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input name="title" type="text" placeholder="Titre" value={formData.title} onChange={handleChange} className="border p-2 w-full" />
         <input name="date" type="datetime-local" value={formData.date} onChange={handleChange} className="border p-2 w-full" />
         <input name="stage" type="text" placeholder="Scène" value={formData.stage} onChange={handleChange} className="border p-2 w-full" />
         <input name="artist_id" type="number" placeholder="ID Artiste" value={formData.artist_id} onChange={handleChange} className="border p-2 w-full" />
         <input name="map_areas_id" type="number" placeholder="ID Zone (map_areas)" value={formData.map_areas_id} onChange={handleChange} className="border p-2 w-full" />
-        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Créer</button>
+        <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">➕ Créer</button>
+        <button
+            type="button"
+            onClick={() => navigate("/admin/events")}
+            className="text-gray-600 underline"
+          >
+            Annuler</button>
       </form>
     </div>
   );

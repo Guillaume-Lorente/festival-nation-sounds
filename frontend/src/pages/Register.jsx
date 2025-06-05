@@ -59,7 +59,7 @@ export default function Register() {
 
   return (
     <div className="p-6 max-w-md mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-center">Créer un compte</h1>
+      <h1 className="text-3xl text-blue-700 font-bold mb-6 text-center">Créer un compte</h1>
 
       {error && (
         <p className="text-red-600 mb-4" role="alert" id="register-error">

@@ -40,7 +40,7 @@ export default function Login() {
 
   return (
     <div className="p-6 max-w-md mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-center">Connexion à votre compte</h1>
+      <h1 className="text-3xl text-blue-700 font-bold mb-6 text-center">Connexion à votre compte</h1>
 
       {error && (
         <p

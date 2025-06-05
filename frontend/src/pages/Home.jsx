@@ -81,7 +81,7 @@ export default function Home() {
 
         {/* SECTION ARTISTES */}
         <section className="mt-10 px-4 relative" aria-label="Artistes à l'affiche">
-          <h2 className="text-2xl font-bold mb-4">À l'affiche</h2>
+          <h2 className="text-2xl text-blue-600 font-bold mb-4">🔥 À l'affiche 🔥</h2>
 
           <button
             onClick={scrollLeft}
@@ -95,18 +95,20 @@ export default function Home() {
             ref={carouselRef}
             className="flex overflow-x-auto no-scrollbar gap-4 px-6"
           >
-            {artists.map((artist) => (
+            {artists.slice(0, 6).map((artist) => (
               <div key={artist.id} className="flex-shrink-0 w-64 mx-2">
                 <ArtistCard artist={artist} />
               </div>
             ))}
 
-            <div className="flex-shrink-0 w-64 mx-2 bg-yellow-300 text-center p-6 rounded shadow hover:bg-yellow-200 transition cursor-pointer flex flex-col justify-center items-center">
-              <h3 className="text-xl text-red-600 font-semibold mb-2">Voir plus</h3>
-              <Link to="/lineup" className="text-blue-600 underline hover:text-blue-800">
-                Toute la programmation →
-              </Link>
-            </div>
+            <Link
+  to="/lineup"
+  className="flex-shrink-0 w-64 mx-2 bg-yellow-400 text-center p-6 rounded-xl shadow hover:bg-yellow-200 transition cursor-pointer flex flex-col justify-center items-center"
+>
+  <h3 className="text-xl text-red-600 font-bold mb-2">
+    Voir toute la programmation
+  </h3>
+</Link>
           </div>
 
           <button

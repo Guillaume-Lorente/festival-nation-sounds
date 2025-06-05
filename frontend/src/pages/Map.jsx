@@ -87,7 +87,7 @@ export default function Map() {
 
   return (
     <div className="w-full max-w-5xl mx-auto mt-6">
-      <h1 className="text-3xl font-bold text-center mb-4">Plan du festival !</h1>
+      <h1 className="text-3xl font-bold text-center text-blue-700 mb-4">🗺️ Plan du festival</h1>
 
       <div className="flex flex-wrap gap-2 justify-center mb-4" role="group" aria-label="Filtres des zones de la carte">
         <button

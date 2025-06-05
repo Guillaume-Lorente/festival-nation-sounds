@@ -39,7 +39,7 @@ export default function AdminLogin() {
         onSubmit={handleLogin}
         className="bg-white p-6 rounded shadow-md w-80"
       >
-        <h2 className="text-xl font-bold mb-4 text-center">Connexion Admin</h2>
+        <h2 className="text-xl text-blue-700 font-bold mb-4 text-center">Connexion Admin</h2>
 
         <input
           type="email"

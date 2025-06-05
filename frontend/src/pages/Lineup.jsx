@@ -47,7 +47,7 @@ export default function Lineup() {
       <h1 className="sr-only">Programmation du festival Nation Sounds</h1>
 
       <div className="text-center mb-10">
-        <h2 className="text-3xl font-bold text-blue-700 mb-2">🎤 La line-up</h2>
+        <h2 className="text-3xl font-bold text-blue-700 mb-2">🎤 La Programmation</h2>
         <p className="text-gray-600 mb-6">
           Découvre les artistes présents chaque jour du festival.
         </p>
