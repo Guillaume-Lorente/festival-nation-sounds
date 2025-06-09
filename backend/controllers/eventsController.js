@@ -7,7 +7,7 @@ exports.getAllEvents = async (req, res) => {
     let events;
 
     if (map_area_id) {
-      events = await eventsModel.findByMapAreaId(map_area_id); // ✅ AJOUTÉ
+      events = await eventsModel.findByMapAreaId(map_area_id);
     } else if (day) {
       events = await eventsModel.findByDay(day);
     } else {

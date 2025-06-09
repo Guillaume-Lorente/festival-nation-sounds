@@ -34,7 +34,7 @@ exports.register = async (req, res) => {
     return res.status(500).json({ error: "Erreur serveur reCAPTCHA." });
   }
 
-  // ✅ Suite du traitement (utilisateur déjà existant, hash, etc.)
+  // Suite du traitement
   try {
     const existingUser = await usersModel.findByEmail(email);
     if (existingUser) {

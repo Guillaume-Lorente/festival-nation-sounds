@@ -26,9 +26,9 @@ const contactRoutes = require("./routes/contact");
 app.use("/api/artists", artistsRoutes);
 app.use("/api/events", eventsRoutes);
 app.use("/api/users", usersRoutes);
-app.use("/api/users", favoritesRoutes); // favorites rattaché aux users
+app.use("/api/users", favoritesRoutes);
 app.use("/api/map-areas", mapAreasRoutes);
-app.use("/api/auth", authRoutes); // ✅ branchement du login admin
+app.use("/api/auth", authRoutes);
 app.use("/api/contact", contactRoutes);
 
 // Export de l’app pour utilisation dans server.js

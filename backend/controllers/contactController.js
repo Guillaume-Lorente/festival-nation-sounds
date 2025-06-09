@@ -7,7 +7,7 @@ exports.submitContactForm = async (req, res) => {
     return res.status(400).json({ error: "Tous les champs sont requis." });
   }
 
-  // ✅ Vérifier le token reCAPTCHA
+  // Vérifier le token reCAPTCHA
   try {
     const verification = await axios.post(
       "https://www.google.com/recaptcha/api/siteverify",
@@ -32,7 +32,6 @@ exports.submitContactForm = async (req, res) => {
       .json({ error: "Erreur lors de la vérification reCAPTCHA." });
   }
 
-  // ✅ Simule une action (par exemple, sauvegarde ou envoi d'email)
   console.log("📨 Nouveau message contact :", { name, email, message });
 
   return res
