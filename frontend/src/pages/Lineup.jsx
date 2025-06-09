@@ -43,7 +43,6 @@ export default function Lineup() {
 
   return (
     <div className="p-8 max-w-6xl mx-auto">
-      {/* Titre principal de la page */}
       <h1 className="sr-only">Programmation du festival Nation Sounds</h1>
 
       <div className="text-center mb-10">

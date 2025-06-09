@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useFavorites } from "../context/FavoritesContext"; // ✅ On utilise maintenant le contexte
+import { useFavorites } from "../context/FavoritesContext";
 import { Link } from "react-router-dom";
 
 
@@ -11,7 +11,7 @@ export default function Account() {
   const user = JSON.parse(localStorage.getItem("user"));
   const token = localStorage.getItem("token");
 
-  const { favorites, removeFavorite } = useFavorites(); // ✅ Accès au contexte
+  const { favorites, removeFavorite } = useFavorites();
 
   // Redirection si utilisateur non connecté
   useEffect(() => {

@@ -81,7 +81,6 @@ export default function Footer() {
   </button>
 </p>
 
-      {/* Copyright */}
       <p className="text-sm">
         &copy; {new Date().getFullYear()} Nation Sounds. Tous droits réservés.
       </p>

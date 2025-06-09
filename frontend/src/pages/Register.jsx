@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import RecaptchaWrapper from "../components/RecaptchaWrapper"; // <-- important
+import RecaptchaWrapper from "../components/RecaptchaWrapper";
 
 export default function Register() {
   const [email, setEmail] = useState("");

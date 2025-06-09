@@ -52,7 +52,7 @@ export default function Home() {
           />
 
           <section className="absolute inset-0 flex flex-col justify-center items-center bg-black/40 text-white px-6">
-            <h1 className="sr-only">Festival Nation Sounds</h1> {/* Accessibilité & SEO */}
+            <h1 className="sr-only">Festival Nation Sounds</h1>
             <img
               src="/images/NationSounds.png"
               alt="Nation Sounds Festival"

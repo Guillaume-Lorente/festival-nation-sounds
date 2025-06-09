@@ -17,7 +17,6 @@ export default function ArtistCard({ artist, linkToDetail = true }) {
 
   return (
   <div className="bg-yellow-400 p-4 border rounded-xl shadow flex flex-col justify-between w-full">
-    {/* Partie image + texte centrée */}
     <div className="text-center">
       <div className="w-full mb-2">
         <img

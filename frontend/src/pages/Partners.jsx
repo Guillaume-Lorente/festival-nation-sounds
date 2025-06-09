@@ -28,7 +28,6 @@ export default function Partenaires() {
               className="mx-auto h-16"
             />
           </div>
-          {/* Ajoute d'autres logos au besoin */}
         </div>
       </section>
     </div>

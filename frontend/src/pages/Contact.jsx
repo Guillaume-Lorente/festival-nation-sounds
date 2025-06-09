@@ -1,4 +1,4 @@
-import React, { useState } from "react"; // ✅ ajouter useState ici
+import React, { useState } from "react";
 import RecaptchaWrapper from "../components/RecaptchaWrapper";
 
 export default function Contact() {
