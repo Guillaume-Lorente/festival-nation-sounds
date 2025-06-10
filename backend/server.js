@@ -9,5 +9,5 @@ const PORT = process.env.PORT || 5000;
 
 // Démarre le serveur
 app.listen(PORT, () => {
-  console.log(`Serveur en ligne sur http://localhost:${PORT}`);
+  console.log(`Serveur en ligne sur le port ${PORT}`);
 });
