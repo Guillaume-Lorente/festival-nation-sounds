@@ -10,7 +10,7 @@ export default function AdminManageMapAreas() {
   }, []);
 
   const fetchZones = () => {
-    fetch("http://localhost:5000/api/map-areas")
+    fetch("/api/map-areas")
       .then((res) => res.json())
       .then((data) => setZones(data))
       .catch((err) => console.error("Erreur chargement zones:", err));
@@ -19,7 +19,7 @@ export default function AdminManageMapAreas() {
   const handleDelete = (id) => {
     if (!window.confirm("Êtes-vous sûr de vouloir supprimer cette zone ?")) return;
 
-    fetch(`http://localhost:5000/api/map-areas/${id}`, { method: "DELETE" })
+    fetch(`/api/map-areas/${id}`, { method: "DELETE" })
       .then(() => fetchZones())
       .catch((err) => console.error("Erreur suppression:", err));
   };

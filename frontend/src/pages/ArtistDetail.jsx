@@ -15,7 +15,7 @@ export default function ArtistDetail() {
   useEffect(() => {
     const fetchArtistAndEvent = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/artists/${id}`);
+        const res = await fetch(`/api/artists/${id}`);
         const data = await res.json();
 
         if (!res.ok) {
@@ -25,7 +25,7 @@ export default function ArtistDetail() {
 
         setArtist(data);
 
-        const eventRes = await fetch("http://localhost:5000/api/events");
+        const eventRes = await fetch("/api/events");
         const events = await eventRes.json();
         const foundEvent = events.find((e) => e.artist_id === Number(id));
         setEvent(foundEvent);

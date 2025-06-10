@@ -6,7 +6,7 @@ export default function AdminManageEvents() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/events")
+    fetch("/api/events")
       .then((res) => res.json())
       .then((data) => setEvents(data))
       .catch((err) => console.error("Erreur chargement événements:", err));
@@ -15,7 +15,7 @@ export default function AdminManageEvents() {
   const handleDelete = (id) => {
     if (!window.confirm("Êtes-vous sûr de vouloir supprimer cet événement ?")) return;
 
-    fetch(`http://localhost:5000/api/events/${id}`, { method: "DELETE" })
+    fetch(`/api/events/${id}`, { method: "DELETE" })
       .then(() => setEvents((prev) => prev.filter((event) => event.id !== id)))
       .catch((err) => console.error("Erreur suppression:", err));
   };

@@ -37,7 +37,7 @@ export default function Map() {
   useEffect(() => {
     const fetchMapAreas = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/map-areas");
+        const res = await fetch("/api/map-areas");
         const data = await res.json();
         setAreas(data);
       } catch (err) {
@@ -145,7 +145,7 @@ export default function Map() {
                 setSelectedArea(area);
                 setVisibleArea(area);
                 if (area.type.toLowerCase() === "stage") {
-                  fetch(`http://localhost:5000/api/events?map_area_id=${area.id}`)
+                  fetch(`/api/events?map_area_id=${area.id}`)
                     .then((res) => res.json())
                     .then((data) => setEvents(data))
                     .catch(() => setEvents([]));

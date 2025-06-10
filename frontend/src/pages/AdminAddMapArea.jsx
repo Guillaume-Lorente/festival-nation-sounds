@@ -18,7 +18,7 @@ export default function AdminAddMapArea() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/map-areas", {
+      const res = await fetch("/api/map-areas", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

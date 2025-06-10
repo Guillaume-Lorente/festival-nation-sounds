@@ -18,7 +18,7 @@ export default function AdminAddArtist() {
     e.preventDefault();
 
     try {
-      await fetch("http://localhost:5000/api/artists", {
+      await fetch("/api/artists", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

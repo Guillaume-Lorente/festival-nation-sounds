@@ -16,7 +16,7 @@ export default function AdminEditArtist() {
   });
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/artists/${id}`, {
+    fetch(`/api/artists/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
@@ -39,7 +39,7 @@ export default function AdminEditArtist() {
     e.preventDefault();
 
     try {
-      await fetch(`http://localhost:5000/api/artists/${id}`, {
+      await fetch(`/api/artists/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

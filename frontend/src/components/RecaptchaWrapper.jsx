@@ -8,7 +8,7 @@ export default function RecaptchaWrapper({ onTokenChange }) {
   return (
     <div className="my-4">
       <ReCAPTCHA
-        sitekey="6LeC3VUrAAAAAAnYAVWQRdRBqsjSf8Z5MslxRg17"
+        sitekey="6LcHPVwrAAAAAC0Lb1pHTLU8jhFhZk4OpF7OHBbg"
         onChange={handleChange}
       />
     </div>

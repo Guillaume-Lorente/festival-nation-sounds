@@ -13,16 +13,16 @@ export default function Lineup() {
       setLoading(true);
       try {
         if (day === "all") {
-          const res = await fetch("http://localhost:5000/api/artists");
+          const res = await fetch("/api/artists");
           const data = await res.json();
           setArtists(data);
         } else {
-          const eventRes = await fetch(`http://localhost:5000/api/events?day=${day}`);
+          const eventRes = await fetch(`/api/events?day=${day}`);
           const events = await eventRes.json();
 
           const artistIds = [...new Set(events.map((event) => event.artist_id))];
           const artistFetches = artistIds.map((id) =>
-            fetch(`http://localhost:5000/api/artists/${id}`).then((res) => res.json())
+            fetch(`/api/artists/${id}`).then((res) => res.json())
           );
           const artistData = await Promise.all(artistFetches);
           setArtists(artistData);

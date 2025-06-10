@@ -13,7 +13,7 @@ export default function AdminEditMapArea() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/map-areas/${id}`)
+    fetch(`/api/map-areas/${id}`)
       .then((res) => res.json())
       .then((data) => setFormData(data))
       .catch((err) => console.error("Erreur chargement zone:", err));
@@ -26,7 +26,7 @@ export default function AdminEditMapArea() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`http://localhost:5000/api/map-areas/${id}`, {
+      const res = await fetch(`/api/map-areas/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

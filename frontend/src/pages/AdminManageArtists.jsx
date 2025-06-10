@@ -9,7 +9,7 @@ export default function AdminManageArtists() {
   useEffect(() => {
     const fetchArtists = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/artists", {
+        const res = await fetch("/api/artists", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -28,7 +28,7 @@ export default function AdminManageArtists() {
     if (!window.confirm("Êtes-vous sûr de vouloir supprimer cet artiste ?")) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/artists/${id}`, {
+      const res = await fetch(`/api/artists/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

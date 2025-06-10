@@ -19,7 +19,7 @@ useEffect(() => {
   const fetchFavorites = async () => {
     if (!user || !token) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/users/${user.id}/favorites`, {
+      const res = await fetch(`/api/users/${user.id}/favorites`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -41,7 +41,7 @@ useEffect(() => {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/users/${user.id}/favorites`,
+        `/api/users/${user.id}/favorites`,
         {
           method: "POST",
           headers: {
@@ -67,7 +67,7 @@ useEffect(() => {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/users/${user.id}/favorites/${artistId}`,
+        `/api/users/${user.id}/favorites/${artistId}`,
         {
           method: "DELETE",
           headers: {

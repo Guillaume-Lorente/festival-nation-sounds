@@ -9,7 +9,7 @@ export default function Home() {
   const carouselRef = useRef();
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/artists")
+    fetch("/api/artists")
       .then((res) => res.json())
       .then((data) => setArtists(data))
       .catch((err) => console.error("Erreur de chargement des artistes :", err));

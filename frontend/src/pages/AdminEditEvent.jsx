@@ -13,7 +13,7 @@ export default function AdminEditEvent() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/events/${id}`)
+    fetch(`/api/events/${id}`)
       .then((res) => res.json())
       .then((data) => setFormData(data))
       .catch((err) => console.error("Erreur chargement event:", err));
@@ -26,7 +26,7 @@ export default function AdminEditEvent() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`http://localhost:5000/api/events/${id}`, {
+      const res = await fetch(`/api/events/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
