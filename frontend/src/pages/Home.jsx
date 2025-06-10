@@ -59,7 +59,7 @@ export default function Home() {
               className="h-20 mx-auto mb-4 object-contain"
             />
             <p className="text-lg mb-6 max-w-2xl">
-              L'événement musical de l'année ! Prépare-toi à vivre 3 jours inoubliables au rythme de la musique.
+              L'événement musical de l'année ! Du 22 au 24 août, prépare-toi à vivre des moments inoubliables au rythme de la musique.
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center gap-4 w-full max-w-md mx-auto">
