@@ -19,7 +19,7 @@ useEffect(() => {
   const fetchFavorites = async () => {
     if (!user || !token) return;
     try {
-      const res = await fetch(`/api/users/${user.id}/favorites`, {
+      const res = await fetch(`/api/favorites/${user.id}/favorites`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
