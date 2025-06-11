@@ -15,7 +15,7 @@ export function FavoritesProvider({ children }) {
     const fetchFavorites = async () => {
       if (!user || !token) return;
       try {
-        const res = await fetch(`/api/favorites/user/${user.id}`, {
+        const res = await fetch(`/api/favorites/user/${user.id}/favorites`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -34,7 +34,7 @@ export function FavoritesProvider({ children }) {
     if (!user || !token) return;
 
     try {
-      const res = await fetch(`/api/favorites/user/${user.id}`, {
+      const res = await fetch(`/api/favorites/user/${user.id}/favorites`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -56,7 +56,7 @@ export function FavoritesProvider({ children }) {
     if (!user || !token) return;
 
     try {
-      const res = await fetch(`/api/favorites/user/${user.id}/artist/${artistId}`, {
+      const res = await fetch(`/api/favorites/user/${user.id}/favorites/${artistId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
