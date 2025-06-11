@@ -9,7 +9,8 @@ const path = require("path");
 // Servir les fichiers React (frontend build)
 app.use(express.static(path.join(__dirname, "frontend")));
 
-app.get("/", (req, res) => {
+// Rediriger toutes les routes frontend vers index.html (sauf API)
+app.get(/^(?!\/api\/).*$/, (req, res) => {
   res.sendFile(path.join(__dirname, "frontend", "index.html"));
 });
 
