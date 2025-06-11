@@ -26,7 +26,7 @@ const contactRoutes = require("./routes/contact");
 app.use("/api/artists", artistsRoutes);
 app.use("/api/events", eventsRoutes);
 app.use("/api/users", usersRoutes);
-app.use("/api/users", favoritesRoutes);
+app.use("/api/favorites", favoritesRoutes);
 app.use("/api/map-areas", mapAreasRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/contact", contactRoutes);
