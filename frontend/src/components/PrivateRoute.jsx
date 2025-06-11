@@ -11,7 +11,12 @@ import { Navigate } from "react-router-dom";
  */
 export default function PrivateRoute({ children }) {
   // Récupère les infos de l'utilisateur dans le localStorage
-  const user = JSON.parse(localStorage.getItem("user"));
+  let user = null;
+try {
+  user = JSON.parse(localStorage.getItem("user"));
+} catch {
+  user = null;
+}
 
   // Utilisateur existe, on affiche la page demandée
   if (user) return children;

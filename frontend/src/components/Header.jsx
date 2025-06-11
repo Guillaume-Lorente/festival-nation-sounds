@@ -4,7 +4,12 @@ import { useCart } from "../context/CartContext";
 import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
 
 export default function Header() {
-  const user = JSON.parse(localStorage.getItem("user"));
+  let user = null;
+try {
+  user = JSON.parse(localStorage.getItem("user"));
+} catch {
+  user = null;
+}
   const navigate = useNavigate();
   const { cartItems } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);

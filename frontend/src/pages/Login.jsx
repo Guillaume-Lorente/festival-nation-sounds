@@ -8,9 +8,15 @@ export default function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user) navigate("/account");
-  }, [navigate]);
+  let user = null;
+  try {
+    user = JSON.parse(localStorage.getItem("user"));
+  } catch {
+    user = null;
+  }
+  
+  if (user) navigate("/account");
+}, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

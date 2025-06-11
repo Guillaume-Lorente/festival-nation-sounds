@@ -3,7 +3,12 @@ import { Link } from "react-router-dom";
 import { FavoritesContext } from "../context/FavoritesContext"; // 🔄 Import du contexte des favoris
 
 export default function ArtistCard({ artist, linkToDetail = true }) {
-  const user = JSON.parse(localStorage.getItem("user"));
+  let user = null;
+try {
+  user = JSON.parse(localStorage.getItem("user"));
+} catch {
+  user = null;
+}
 
   // 🔄 On récupère les favoris et la fonction d’ajout depuis le contexte
   const { favorites, addFavorite } = useContext(FavoritesContext);

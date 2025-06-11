@@ -17,6 +17,11 @@ export default function AdminAddArtist() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!token) {
+    console.error("Token manquant.");
+    return;
+  }
+
     try {
       await fetch("/api/artists", {
         method: "POST",

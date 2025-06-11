@@ -8,7 +8,12 @@ export default function Account() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  let user = null;
+try {
+  user = JSON.parse(localStorage.getItem("user"));
+} catch {
+  user = null;
+}
   const token = localStorage.getItem("token");
 
   const { favorites, removeFavorite } = useFavorites();

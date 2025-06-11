@@ -12,9 +12,15 @@ export default function Register() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user) navigate("/account");
-  }, [navigate]);
+  let user = null;
+  try {
+    user = JSON.parse(localStorage.getItem("user"));
+  } catch {
+    user = null;
+  }
+  
+  if (user) navigate("/account");
+}, [navigate]);
 
   const isStrongPassword = (password) => {
     const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&_.,;:])[A-Za-z\d@$!%*?#&_.,;:]{8,}$/;

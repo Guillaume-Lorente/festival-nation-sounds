@@ -9,7 +9,12 @@ export default function ArtistDetail() {
   const [event, setEvent] = useState(null);
   const [error, setError] = useState("");
 
-  const user = JSON.parse(localStorage.getItem("user"));
+   let user = null;
+  try {
+    user = JSON.parse(localStorage.getItem("user"));
+  } catch {
+    user = null;
+  }
   const { favorites, addFavorite } = useFavorites();
 
   useEffect(() => {
