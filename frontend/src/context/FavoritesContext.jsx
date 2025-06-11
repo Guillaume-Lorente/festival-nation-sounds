@@ -15,25 +15,25 @@ export function FavoritesProvider({ children }) {
   const token = localStorage.getItem("token");
 
   // Récupération automatique des favoris à la connexion
-useEffect(() => {
-  const fetchFavorites = async () => {
-    if (!user || !token) return;
-    try {
-      const res = await fetch(`/api/favorites/${user.id}/favorites`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await res.json();
-      if (res.ok) setFavorites(data);
-    } catch (error) {
-      console.error("Erreur de chargement des favoris", error);
-    }
-  };
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      if (!user || !token) return;
+      try {
+        const res = await fetch(`/api/favorites/${user.id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await res.json();
+        if (res.ok) setFavorites(data);
+      } catch (error) {
+        console.error("Erreur de chargement des favoris", error);
+      }
+    };
 
-  fetchFavorites();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, []); // ✅ appel unique au montage uniquement
+    fetchFavorites();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // ✅ appel unique au montage uniquement
 
   // Fonction pour ajouter un favori
   const addFavorite = async (artistId) => {
@@ -41,7 +41,7 @@ useEffect(() => {
 
     try {
       const res = await fetch(
-        `/api/users/${user.id}/favorites`,
+        `/api/favorites/${user.id}`,
         {
           method: "POST",
           headers: {
@@ -67,7 +67,7 @@ useEffect(() => {
 
     try {
       const res = await fetch(
-        `/api/users/${user.id}/favorites/${artistId}`,
+        `/api/favorites/${user.id}/${artistId}`,
         {
           method: "DELETE",
           headers: {
