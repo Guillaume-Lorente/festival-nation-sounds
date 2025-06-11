@@ -14,9 +14,6 @@ exports.login = async (req, res) => {
 
     if (!user) return res.status(401).json({ error: "Utilisateur non trouvé" });
 
-    console.log("Mot de passe fourni :", password);
-    console.log("Mot de passe stocké :", user.password);
-
     const match = await bcrypt.compare(password, user.password);
 
     if (!match)

@@ -8,8 +8,15 @@ require("dotenv").config();
 // Crée une instance de l’app Express
 const app = express();
 
+// === SECURISATION DU CORS ===
+const corsOptions = {
+  origin: "https://nation-sounds.alwaysdata.net",
+  methods: "GET,POST,PUT,DELETE",
+  credentials: true,
+};
+
 // === MIDDLEWARES GLOBAUX ===
-app.use(cors()); // Autorise les requêtes cross-origin
+app.use(cors(corsOptions));
 app.use(express.json()); // Parse les corps de requêtes JSON
 app.use(morgan("dev")); // Log les requêtes dans la console
 
