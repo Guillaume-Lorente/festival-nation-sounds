@@ -4,14 +4,14 @@ const favoritesController = require("../controllers/favoritesController");
 const verifyToken = require("../middlewares/authMiddleware");
 
 // Liste des favoris d’un utilisateur
-router.get("/:user_id", verifyToken, favoritesController.getUserFavorites);
+router.get("/user/:user_id", verifyToken, favoritesController.getUserFavorites);
 
 // Ajouter un artiste aux favoris
-router.post("/:user_id", verifyToken, favoritesController.addFavorite);
+router.post("/user/:user_id", verifyToken, favoritesController.addFavorite);
 
-// Supprimer un artiste des favoris
+// Supprimer un favori
 router.delete(
-  "/:user_id/:artist_id",
+  "/user/:user_id/artist/:artist_id",
   verifyToken,
   favoritesController.removeFavorite
 );
